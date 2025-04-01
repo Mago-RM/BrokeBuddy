@@ -1,0 +1,60 @@
+{
+    "user_id": "default_user",
+    "cards": [
+        {
+            "name": "Main Bank",
+            "balance": 1200
+        }
+    ],
+    "income": [
+        {
+            "source": "Job",
+            "amount": 3000,
+            "frequency": "monthly"
+        }
+    ],
+    "recurring_expenses": [
+        {
+            "name": "Rent",
+            "amount": 900,
+            "category": "Housing",
+            "recurring": true
+        }
+    ],
+    "budget_categories": [
+        {
+            "name": "Groceries",
+            "monthly_limit": 400,
+            "spent": 150
+        },
+        {
+            "name": "Fun",
+            "monthly_limit": 200,
+            "spent": 80
+        }
+    ],
+    "transactions": [
+        {
+            "amount": 15,
+            "category": "Groceries",
+            "date": "2025-03-31",
+            "note": "snacks"
+        },
+        {
+            "amount": 25,
+            "category": "Groceries",
+            "date": "2025-04-01",
+            "note": "lunch"
+        },
+        {
+            "amount": 25,
+            "category": "Coffee",
+            "date": "2025-04-01",
+            "note": "Coffee"
+        }
+    ],
+    "savings": {
+        "goal": 1000,
+        "current": 320
+    }
+}

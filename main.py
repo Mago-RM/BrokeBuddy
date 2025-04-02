@@ -1,3 +1,4 @@
+
 from logic.storage import load_user_data, save_user_data
 
 user = load_user_data("data.json")

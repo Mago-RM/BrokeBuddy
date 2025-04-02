@@ -4,6 +4,10 @@
         {
             "name": "Main Bank",
             "balance": 1200
+        },
+        {
+            "name": "Amex",
+            "balance": 800.0
         }
     ],
     "income": [
@@ -16,8 +20,14 @@
     "recurring_expenses": [
         {
             "name": "Rent",
-            "amount": 900,
+            "amount": 1200.0,
             "category": "Housing",
+            "recurring": true
+        },
+        {
+            "name": "Netflix",
+            "amount": 15.0,
+            "category": "Membership",
             "recurring": true
         }
     ],
@@ -31,6 +41,11 @@
             "name": "Fun",
             "monthly_limit": 200,
             "spent": 80
+        },
+        {
+            "name": "Coffee",
+            "monthly_limit": 50.0,
+            "spent": 0
         }
     ],
     "transactions": [

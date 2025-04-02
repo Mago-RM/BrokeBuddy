@@ -1,75 +1,183 @@
 {
-    "user_id": "default_user",
-    "cards": [
-        {
-            "name": "Main Bank",
-            "balance": 1200
+    "users": {
+        "user": {
+            "password": "pass",
+            "cards": [
+                {
+                    "name": "Main Bank",
+                    "balance": 1200
+                },
+                {
+                    "name": "Amex",
+                    "balance": 800.0
+                }
+            ],
+            "income": [
+                {
+                    "source": "Job",
+                    "amount": 3000,
+                    "frequency": "monthly"
+                }
+            ],
+            "recurring_expenses": [
+                {
+                    "name": "Rent",
+                    "amount": 1200.0,
+                    "category": "Housing",
+                    "recurring": true
+                },
+                {
+                    "name": "Netflix",
+                    "amount": 15.0,
+                    "category": "Membership",
+                    "recurring": true
+                }
+            ],
+            "budget_categories": [
+                {
+                    "name": "Groceries",
+                    "monthly_limit": 400,
+                    "spent": 150
+                },
+                {
+                    "name": "Fun",
+                    "monthly_limit": 200,
+                    "spent": 80
+                },
+                {
+                    "name": "Coffee",
+                    "monthly_limit": 50.0,
+                    "spent": 0
+                }
+            ],
+            "transactions": [
+                {
+                    "amount": 15,
+                    "category": "Groceries",
+                    "date": "2025-03-31",
+                    "note": "snacks"
+                },
+                {
+                    "amount": 25,
+                    "category": "Groceries",
+                    "date": "2025-04-01",
+                    "note": "lunch"
+                },
+                {
+                    "amount": 25,
+                    "category": "Coffee",
+                    "date": "2025-04-01",
+                    "note": "Coffee"
+                }
+            ],
+            "savings": {
+                "goal": 1000,
+                "current": 320
+            }
         },
-        {
-            "name": "Amex",
-            "balance": 800.0
+        "alice123": {
+            "password": "passalice",
+            "cards": [
+                {
+                    "name": "Visa",
+                    "balance": 1800
+                }
+            ],
+            "income": [
+                {
+                    "source": "Freelance",
+                    "amount": 4200,
+                    "frequency": "monthly"
+                }
+            ],
+            "recurring_expenses": [
+                {
+                    "name": "Spotify",
+                    "amount": 10.0,
+                    "category": "Membership",
+                    "recurring": true
+                }
+            ],
+            "budget_categories": [
+                {
+                    "name": "Dining",
+                    "monthly_limit": 300,
+                    "spent": 150
+                },
+                {
+                    "name": "Subscriptions",
+                    "monthly_limit": 50,
+                    "spent": 10
+                }
+            ],
+            "transactions": [
+                {
+                    "amount": 30,
+                    "category": "Dining",
+                    "date": "2025-04-01",
+                    "note": "Lunch out"
+                }
+            ],
+            "savings": {
+                "goal": 2000,
+                "current": 600
+            }
+        },
+        "bob456": {
+            "password": "passbob",
+            "cards": [
+                {
+                    "name": "Checking",
+                    "balance": 600
+                }
+            ],
+            "income": [
+                {
+                    "source": "Part-time",
+                    "amount": 1500,
+                    "frequency": "monthly"
+                }
+            ],
+            "recurring_expenses": [
+                {
+                    "name": "Phone Bill",
+                    "amount": 40.0,
+                    "category": "Utilities",
+                    "recurring": true
+                }
+            ],
+            "budget_categories": [
+                {
+                    "name": "Transport",
+                    "monthly_limit": 100,
+                    "spent": 25
+                }
+            ],
+            "transactions": [
+                {
+                    "amount": 12,
+                    "category": "Transport",
+                    "date": "2025-03-30",
+                    "note": "Bus ride"
+                }
+            ],
+            "savings": {
+                "goal": 500,
+                "current": 120
+            }
+        },
+        "mago": {
+            "user_id": "mago",
+            "cards": [],
+            "income": [],
+            "recurring_expenses": [],
+            "budget_categories": [],
+            "transactions": [],
+            "savings": {
+                "goal": 0,
+                "current": 0
+            },
+            "password": "chiri"
         }
-    ],
-    "income": [
-        {
-            "source": "Job",
-            "amount": 3000,
-            "frequency": "monthly"
-        }
-    ],
-    "recurring_expenses": [
-        {
-            "name": "Rent",
-            "amount": 1200.0,
-            "category": "Housing",
-            "recurring": true
-        },
-        {
-            "name": "Netflix",
-            "amount": 15.0,
-            "category": "Membership",
-            "recurring": true
-        }
-    ],
-    "budget_categories": [
-        {
-            "name": "Groceries",
-            "monthly_limit": 400,
-            "spent": 150
-        },
-        {
-            "name": "Fun",
-            "monthly_limit": 200,
-            "spent": 80
-        },
-        {
-            "name": "Coffee",
-            "monthly_limit": 50.0,
-            "spent": 0
-        }
-    ],
-    "transactions": [
-        {
-            "amount": 15,
-            "category": "Groceries",
-            "date": "2025-03-31",
-            "note": "snacks"
-        },
-        {
-            "amount": 25,
-            "category": "Groceries",
-            "date": "2025-04-01",
-            "note": "lunch"
-        },
-        {
-            "amount": 25,
-            "category": "Coffee",
-            "date": "2025-04-01",
-            "note": "Coffee"
-        }
-    ],
-    "savings": {
-        "goal": 1000,
-        "current": 320
     }
 }

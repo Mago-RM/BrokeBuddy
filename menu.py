@@ -2,8 +2,13 @@
 
 from logic.storage import load_user_data, save_user_data
 from logic.models import Card, Income, Expense, BudgetCategory, Transaction
+from logic.auth import create_user, get_user, delete_user, list_users, login_menu  # if login_menu is moved to auth, or define it in menu.py
 
-user = load_user_data("data.json")
+#This reads straight from json file.
+#user = load_user_data("data.json")
+
+#Use this to check for password
+user = login_menu()
 
 def print_main_menu():
     print("\n==== BrokeBuddy Menu ====")
@@ -27,6 +32,8 @@ def print_main_menu():
     print("18. Add Budget Category")
     print("19. Edit Budget Category")
     print("20. Delete Budget Category")
+    print("21. See Potential Savings")
+    print("22. View Your Progress")
     print("0. Exit")
 
 #                    - - - - - > C A R D S < - - - - - -
@@ -236,6 +243,39 @@ def delete_budget():
     else:
         print("Invalid selection.")
 
+#                    - - - - - S A V I N G S   - - - - - -
+def forecast_monthly_savings(user):
+    total_income = sum(i.amount for i in user.income if i.frequency == "monthly")
+    total_expenses = sum(e.amount for e in user.recurring_expenses if e.recurring)
+    net = total_income - total_expenses
+    print("\n-- Monthly Forecast --")
+    print(f"Monthly Income: ${total_income}")
+    print(f"Recurring Expenses: ${total_expenses}")
+    print(f"Estimated Monthly Savings: ${net}")
+    return net
+
+def view_savings_progress():
+    goal = user.savings.get("goal", 0)
+    current = user.savings.get("current", 0)
+    print("\n-- Savings Progress --")
+    print(f"Goal: ${goal} | Current: ${current}")
+    if goal > 0:
+        percent = round((current / goal) * 100, 1)
+        print(f"Progress: {percent}%")
+
+def update_savings():
+    new_goal = float(input("New savings goal: "))
+    new_current = float(input("New current savings: "))
+    user.savings["goal"] = new_goal
+    user.savings["current"] = new_current
+    save_user_data(user, "data.json")
+    print("Savings updated!")
+
+#                    - - - - - M A I N  M E N U  L O O P - - - - - -
+#Handle Login to get a
+user = login_menu()
+
+# THEN, Show main budget menu for user
 while True:
     print_main_menu()
     choice = input("Choose an option: ")
@@ -260,8 +300,11 @@ while True:
     elif choice == "18": add_budget()
     elif choice == "19": edit_budget()
     elif choice == "20": delete_budget()
+    elif choice == "21": forecast_monthly_savings(user)
+    elif choice == "22": view_savings_progress()
     elif choice == "0":
         print("Goodbye!")
         break
     else:
         print("Invalid option. Try again.")
+

@@ -187,7 +187,7 @@ def edit_transaction():
         new_amount = float(input("New amount: "))
         # TODO: handle negative values
         new_category = input("New category: ")
-        if new_category not in user.categories:
+        if new_category not in user.budget_categories:
             print("Invalid category. Please choose from the list.")
             return
         new_note = input("New note (optional): ")

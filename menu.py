@@ -45,6 +45,9 @@ def view_cards():
 def add_card():
     name = input("Card name: ")
     balance = float(input("Initial balance: "))
+    if balance < 0:
+        print("Invalid balance. Please enter a positive value.")
+        return
     user.cards.append(Card(name, balance))
     save_user_data(user, "data.json")
     print("Card added!")
@@ -56,6 +59,9 @@ def edit_card():
     choice_index = int(input("Enter number to edit: ")) - 1
     if 0 <= choice_index < len(user.cards):
         new_balance = float(input(f"New balance for {user.cards[choice_index].name}: "))
+        if new_balance < 0:
+            print("Invalid balance. Please enter a positive value.")
+            return
         user.cards[choice_index].balance = new_balance
         save_user_data(user, "data.json")
         print("Card updated!")
@@ -84,7 +90,11 @@ def view_income():
 def add_income():
     source = input("Income source: ")
     amount = float(input("Amount: "))
+    if amount < 0:
+        print("Invalid amount. Please enter a positive value.")
+        return
     frequency = input("Frequency (monthly/weekly): ")
+    # Maybe add validation for frequency input
     user.income.append(Income(source, amount, frequency))
     save_user_data(user, "data.json")
     print("Income added!")
@@ -96,7 +106,11 @@ def edit_income():
     choice_index = int(input("Enter number to edit: ")) - 1
     if 0 <= choice_index < len(user.income):
         new_amount = float(input("New amount: "))
+        if new_amount < 0:
+            print("Invalid amount. Please enter a positive value.")
+            return
         new_frequency = input("New frequency (monthly/weekly): ")
+        # Maybe validate frequency input
         user.income[choice_index].amount = new_amount
         user.income[choice_index].frequency = new_frequency
         save_user_data(user, "data.json")
@@ -126,7 +140,11 @@ def view_expenses():
 def add_expense():
     name = input("Expense name: ")
     amount = float(input("Amount: "))
+    if amount < 0:
+        print("Invalid amount. Please enter a positive value.")
+        return
     category = input("Category: ")
+    # TODO: handle expenses and linking to budget category
     user.recurring_expenses.append(Expense(name, amount, category, recurring=True))
     save_user_data(user, "data.json")
     print("Expense added!")
@@ -138,7 +156,11 @@ def edit_expense():
     choice_index = int(input("Enter number to edit: ")) - 1
     if 0 <= choice_index < len(user.recurring_expenses):
         new_amount = float(input("New amount: "))
+        if new_amount < 0:
+            print("Invalid amount. Please enter a positive value.")
+            return
         new_category = input("New category: ")
+        # TODO: handle expenses and linking to budget category
         user.recurring_expenses[choice_index].amount = new_amount
         user.recurring_expenses[choice_index].category = new_category
         save_user_data(user, "data.json")
@@ -147,6 +169,7 @@ def edit_expense():
         print("Invalid selection.")
 
 def delete_expense():
+    # TODO: handle expenses and linking to budget category
     print("\n-- Delete Recurring Expense --")
     for i, e in enumerate(user.recurring_expenses):
         print(f"{i+1}. {e.name}: ${e.amount} [{e.category}]")
@@ -168,7 +191,9 @@ def view_transactions():
 
 def add_transaction():
     amount = float(input("Amount: "))
-    # TODO: handle negative values
+    if amount < 0:
+        print("Invalid amount. Please enter a positive value.")
+        return
     category = input("Category: ")
     if category not in user.budget_categories:
         print("Invalid category. Please choose from the list.")
@@ -185,7 +210,9 @@ def edit_transaction():
     choice_index = int(input("Enter number to edit: ")) - 1
     if 0 <= choice_index < len(user.transactions):
         new_amount = float(input("New amount: "))
-        # TODO: handle negative values
+        if new_amount < 0:
+            print("Invalid amount. Please enter a positive value.")
+            return
         new_category = input("New category: ")
         if new_category not in user.budget_categories:
             print("Invalid category. Please choose from the list.")
@@ -218,15 +245,15 @@ def view_budgets():
     for b in user.budget_categories.values():
         print(f"{b.name}: Spent ${b.spent} / ${b.monthly_limit}")
 
-# For some reason the root of data.json gets deleted TODO: fix it
-# Maybe due to save_user_data
 def add_budget():
     name = input("Category name: ")
     if name in user.budget_categories:
         print("Category already exists.")
         return
     limit = float(input("Monthly limit: "))
-    # TODO: handle negative values
+    if limit < 0:
+        print("Invalid limit. Please enter a positive value.")
+        return
     user.budget_categories[name] = (BudgetCategory(name, limit))
     save_user_data(user, "data.json")
     print("Budget category added!")
@@ -238,7 +265,9 @@ def edit_budget():
     choice_index = int(input("Enter number to edit: ")) - 1
     if 0 <= choice_index < len(user.budget_categories):
         new_limit = float(input("New monthly limit: "))
-        # TODO: handle negative values
+        if new_limit < 0:
+            print("Invalid limit. Please enter a positive value.")
+            return
         choice_name = list(user.budget_categories.keys())[choice_index]
         user.budget_categories[choice_name].monthly_limit = new_limit
         save_user_data(user, "data.json")
@@ -282,7 +311,13 @@ def view_savings_progress():
 
 def update_savings():
     new_goal = float(input("New savings goal: "))
+    if new_goal < 0:
+        print("Invalid goal. Please enter a positive value.")
+        return
     new_current = float(input("New current savings: "))
+    if new_current < 0:
+        print("Invalid current savings. Please enter a positive value.")
+        return
     user.savings["goal"] = new_goal
     user.savings["current"] = new_current
     save_user_data(user, "data.json")

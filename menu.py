@@ -200,6 +200,7 @@ def add_transaction():
         return
     note = input("Note (optional): ")
     user.transactions.append(Transaction(amount, category, note=note))
+    user.budget_categories[category].add_expense(amount)
     save_user_data(user, "data.json")
     print("Transaction added!")
 
@@ -210,10 +211,12 @@ def edit_transaction():
     choice_index = int(input("Enter number to edit: ")) - 1
     if 0 <= choice_index < len(user.transactions):
         new_amount = float(input("New amount: "))
+        old_amount = user.transactions[choice_index].amount
         if new_amount < 0:
             print("Invalid amount. Please enter a positive value.")
             return
         new_category = input("New category: ")
+        old_category = user.transactions[choice_index].category
         if new_category not in user.budget_categories:
             print("Invalid category. Please choose from the list.")
             return
@@ -221,6 +224,8 @@ def edit_transaction():
         user.transactions[choice_index].amount = new_amount
         user.transactions[choice_index].category = new_category
         user.transactions[choice_index].note = new_note
+        user.budget_categories[old_category].add_expense(-old_amount)
+        user.budget_categories[new_category].add_expense(new_amount)
         save_user_data(user, "data.json")
         print("Transaction updated!")
     else:
@@ -232,6 +237,8 @@ def delete_transaction():
         print(f"{i+1}. {t.date} | {t.category}: ${t.amount} ({t.note})")
     choice_index = int(input("Enter number to delete: ")) - 1
     if 0 <= choice_index < len(user.transactions):
+        amount = user.transactions[choice_index].amount
+        user.budget_categories[user.transactions[choice_index].category].add_expense(-amount)
         deleted = user.transactions.pop(choice_index)
         save_user_data(user, "data.json")
         print("Deleted transaction.")

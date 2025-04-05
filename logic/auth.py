@@ -23,18 +23,15 @@ def create_user(user_id, file_path="data.json"):
     return user
 
 
-def get_user(user_id, file_path="data.json"):
+def get_user(user_id, password_attempt, file_path="data.json"):
     data = load_all_users(file_path)
     if user_id not in data["users"]:
-        print("User not found.")
-        return None
+        return None  # User doesn't exist
 
     saved_password = data["users"][user_id].get("password")
-    attempt = input("Enter password: ")
 
-    if attempt != saved_password:
-        print("Incorrect password.")
-        return None
+    if password_attempt != saved_password:
+        return None  # Password mismatch
 
     user_data = data["users"][user_id]
     user = User(user_id)

@@ -178,6 +178,20 @@
                 "current": 0
             },
             "password": "chiri"
+        },
+        "user2": {
+            "user_id": "user2",
+            "cards": [],
+            "income": [],
+            "recurring_expenses": [],
+            "budget_categories": [],
+            "transactions": [],
+            "savings": {
+                "goal": 0,
+                "current": 0
+            },
+            "password": "chiri",
+            "email": "user2mail@mail.com"
         }
     }
 }

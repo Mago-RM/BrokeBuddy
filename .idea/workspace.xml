@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="User Log In added to Json in auth.py&#10;&#10;Modified json structure to include more users.&#10;&#10;Program runs from Menu, not main">
-      <change afterPath="$PROJECT_DIR$/assets/cute_doge_circle.png" afterDir="false" />
+    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="Welcome Screen Up">
+      <change afterPath="$PROJECT_DIR$/assets/coins.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/doggo_cutout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/money_bg.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +40,9 @@
     "accountId": "ced0e585-aea3-443f-ba17-e1e89b337a92"
   }
 }]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 6
 }]]></component>
@@ -83,7 +90,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743548300912</updated>
-      <workItem from="1743548302003" duration="10911000" />
+      <workItem from="1743548302003" duration="27046000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Structure Set Up.&#10;Json Reading working (temp)">
       <option name="closed" value="true" />
@@ -109,21 +116,41 @@
       <option name="project" value="LOCAL" />
       <updated>1743568968870</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Welcome Screen Up">
+      <option name="closed" value="true" />
+      <created>1743707766447</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1743707766447</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Basic Structure Set Up.&#10;Json Reading working (temp)" />
     <MESSAGE value="Menu for basic UI working&#10;Json working&#10;Methods for view, add, edit and delete implemented for all: cards, income, expenses, transactions and budget." />
     <MESSAGE value="User Log In added to Json in auth.py&#10;&#10;Modified json structure to include more users.&#10;&#10;Program runs from Menu, not main" />
-    <option name="LAST_COMMIT_MESSAGE" value="User Log In added to Json in auth.py&#10;&#10;Modified json structure to include more users.&#10;&#10;Program runs from Menu, not main" />
+    <MESSAGE value="Welcome Screen Up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Welcome Screen Up" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BrokeBuddy$main.coverage" NAME="main Coverage Results" MODIFIED="1743550806731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/BrokeBuddy$ui.coverage" NAME="ui Coverage Results" MODIFIED="1743574368439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$ui.coverage" NAME="ui Coverage Results" MODIFIED="1743834888560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$menu.coverage" NAME="menu Coverage Results" MODIFIED="1743568794516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

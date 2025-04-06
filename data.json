@@ -76,7 +76,7 @@
             }
         },
         "alice123": {
-            "password": "passalice",
+            "password": "alice",
             "cards": [
                 {
                     "name": "Visa",
@@ -121,7 +121,8 @@
             "savings": {
                 "goal": 2000,
                 "current": 600
-            }
+            },
+            "email": "alice@gmail.com"
         },
         "bob456": {
             "password": "passbob",
@@ -168,19 +169,6 @@
         },
         "mago": {
             "user_id": "mago",
-            "cards": [],
-            "income": [],
-            "recurring_expenses": [],
-            "budget_categories": [],
-            "transactions": [],
-            "savings": {
-                "goal": 0,
-                "current": 0
-            },
-            "password": "chiri"
-        },
-        "user2": {
-            "user_id": "user2",
             "cards": [],
             "income": [],
             "recurring_expenses": [],

@@ -104,14 +104,8 @@ class SignInFrame(ctk.CTkFrame):
 
         user = get_user(username, password)
 
-        if not username or not password:
-            messagebox.showwarning("Missing Info", "Please enter both username and password.")
-            return
-
-        user = get_user(username, password)
-
         if user:
             messagebox.showinfo("Success", f"Welcome back, {username}!")
-            self.switch_to("dashboard")  # or whatever screen will show at login
+            self.switch_to("dashboard", user_id=username)
         else:
             messagebox.showerror("Login Failed", "Invalid username or password.")

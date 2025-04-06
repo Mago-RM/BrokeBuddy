@@ -168,6 +168,19 @@ class dashFrame(ctk.CTkFrame):
         )
         self.graph_button.pack(side="left", expand=True, fill="x", padx=2, pady=2)
 
+        # Account
+        self.acc_button = ctk.CTkButton(
+            self.nav_bar,
+            text="Account",
+            fg_color="#4CAF50",
+            text_color="white",
+            border_color="white",
+            border_width=2,
+            hover_color="#43a047",
+            command=self.open_account
+        )
+        self.acc_button.pack(side="left", expand=True, fill="x", padx=2, pady=2)
+
 
         self.back_button = ctk.CTkButton(
             self.nav_bar,
@@ -182,28 +195,34 @@ class dashFrame(ctk.CTkFrame):
         self.back_button.pack(pady=10)
 
     #               - - - - - - - > A C T I O N S  < - - - - - -
+    def set_user(self, user_id):
+        self.current_user_id = user_id
+
     # Graphs, Budgets, Expenses, Recurrent Charges,
     def back_to_login(self):
-        self.switch_to("login")
+        self.switch_to("login", user_id = self.current_user_id)
 
     def open_income(self):
-        self.switch_to("income")
+        self.switch_to("income", user_id = self.current_user_id)
 
     def open_cards(self):
-        self.switch_to("cards")
+        self.switch_to("cards", user_id = self.current_user_id)
 
     def open_savings(self):
-        self.switch_to("savings")
+        self.switch_to("savings", user_id = self.current_user_id)
 
     def open_recurrent(self):
-        self.switch_to("recurrent")
+        self.switch_to("recurrent", user_id = self.current_user_id)
 
     def open_expenses(self):
-        self.switch_to("expenses")
+        self.switch_to("expenses", user_id = self.current_user_id)
 
     def open_budgets(self):
-        self.switch_to("budgets")
+        self.switch_to("budgets", user_id = self.current_user_id)
 
     def open_graphs(self):
-        self.switch_to("graphs")
+        self.switch_to("graphs", user_id = self.current_user_id)
+
+    def open_account(self):
+        self.switch_to("account", user_id= self.current_user_id)
 

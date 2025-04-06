@@ -38,9 +38,11 @@ def get_user(user_id, password_attempt, file_path="data.json"):
     user.cards = [Card(**c) for c in user_data.get("cards", [])]
     user.income = [Income(**i) for i in user_data.get("income", [])]
     user.recurring_expenses = [Expense(**e) for e in user_data.get("recurring_expenses", [])]
-    user.budget_categories = [BudgetCategory(b["name"], b["monthly_limit"]) for b in user_data.get("budget_categories", [])]
-    for cat, b in zip(user.budget_categories, user_data.get("budget_categories", [])):
-        cat.spent = b.get("spent", 0)
+    user.budget_categories = {}
+    for b in user_data.get("budget_categories", []):
+        category = BudgetCategory(b["name"], b["monthly_limit"])
+        category.spent = b.get("spent", 0)
+        user.budget_categories[category.name] = category
     user.transactions = [Transaction(**t) for t in user_data.get("transactions", [])]
     user.savings = user_data.get("savings", {"goal": 0, "current": 0})
 

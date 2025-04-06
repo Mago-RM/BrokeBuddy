@@ -90,7 +90,7 @@ class User:
         self.cards = []
         self.income = []
         self.recurring_expenses = []
-        self.budget_categories = []
+        self.budget_categories = {} # Change to a dict mapping categoryName:budgetObject
         self.transactions = []
         self.savings = {"goal": 0, "current": 0}
 
@@ -100,7 +100,7 @@ class User:
             "cards": [c.to_dict() for c in self.cards],
             "income": [i.to_dict() for i in self.income],
             "recurring_expenses": [e.to_dict() for e in self.recurring_expenses],
-            "budget_categories": [b.to_dict() for b in self.budget_categories],
+            "budget_categories": [b.to_dict() for b in self.budget_categories.values()],
             "transactions": [t.to_dict() for t in self.transactions],
             "savings": self.savings
         }

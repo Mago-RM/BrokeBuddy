@@ -45,15 +45,15 @@ class BrokeBuddyApp(ctk.CTk):
         # self.frames["savings"] = SavingsFrame(self, switch_to=self.show_frame)
         #self.frames["graphs"] = GraphsFrame(self, switch_to=self.show_frame)
 
-    #Passes UserID to each Frame
-    def show_frame(self, name, user_id=None):
+    #Passes User to each Frame
+    def show_frame(self, name, user=None):
         for frame in self.frames.values():
             frame.pack_forget()
 
         frame = self.frames[name]
 
-        if user_id and hasattr(frame, "set_user"):
-            frame.set_user(user_id)
+        if user and hasattr(frame, "set_user"):
+            frame.set_user(user)
 
         frame.pack(expand=True, fill="both")
 

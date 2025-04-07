@@ -100,14 +100,14 @@ class AccountFrame(ctk.CTkFrame):
             hover_color="#43a047",
             command=lambda: (
                 #print("Back to dashboard with user:", self.current_user_id), #Debug
-                self.switch_to("dashboard", user_id=self.current_user_id)
+                self.switch_to("dashboard", user=self.current_user)
             )
         )
         self.back_button.pack(pady=(10, 20))
 
     #       - - - - - > A C T I O N S < - - - -
-    def set_user(self, user_id):
-        self.current_user_id = user_id
+    def set_user(self, user):
+        self.current_user = user
 
     def change_email_popup(self):
         popup = ctk.CTkToplevel(self)
@@ -128,8 +128,8 @@ class AccountFrame(ctk.CTkFrame):
                 return
 
             data = load_all_users("data.json")
-            if self.current_user_id in data["users"]:
-                data["users"][self.current_user_id]["email"] = new_email
+            if self.current_user.user_id in data["users"]:
+                data["users"][self.current_user.user_id]["email"] = new_email
                 save_all_users(data, "data.json")
                 messagebox.showinfo("Done", "Your email has been updated.")
                 popup.destroy()
@@ -170,8 +170,8 @@ class AccountFrame(ctk.CTkFrame):
                 return
 
             data = load_all_users("data.json")
-            if self.current_user_id in data["users"]:
-                data["users"][self.current_user_id]["password"] = p1
+            if self.current_user.user_id in data["users"]:
+                data["users"][self.current_user.user_id]["password"] = p1
                 save_all_users(data, "data.json")
                 messagebox.showinfo("Done", "Password has been updated.")
                 popup.destroy()
@@ -187,6 +187,6 @@ class AccountFrame(ctk.CTkFrame):
     def delete_account(self):
         confirm = messagebox.askyesno("Delete Account", "Are you sure you want to delete your account?")
         if confirm:
-            delete_user(self.current_user_id)  # Usiing UserID passed to frame.
+            delete_user(self.current_user.user_id)  # Using User passed to frame.
             messagebox.showinfo("Deleted", "Your account has been deleted.")
             self.switch_to("welcome")

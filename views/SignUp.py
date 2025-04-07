@@ -101,6 +101,7 @@ class SignUpFrame(ctk.CTkFrame):
     #               - - - - - - - > A C T I O N S  < - - - - - -
     def signup_action(self):
         username = self.username_entry.get().strip()
+        # TODO: Add format validation for email
         email = self.email_entry.get().strip()
         password = self.password_entry.get().strip()
         confirm = self.password2_entry.get().strip()

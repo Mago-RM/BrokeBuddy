@@ -3,8 +3,13 @@ import customtkinter as ctk
 from customtkinter import CTkImage
 from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
+import io
+
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
+from logic.charts import generate_category_spending_chart
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
@@ -198,6 +203,27 @@ class dashFrame(ctk.CTkFrame):
     #               - - - - - - - > A C T I O N S  < - - - - - -
     def set_user(self, user):
         self.current_user = user
+
+    # TODO: fix sizing of chart and fix axis numbering
+    def generate_spending_chart(self):
+        if self.current_user is None:
+            tk.messagebox.showwarning("Missing User", "Please log in to generate your spending chart.")
+            return
+
+        chart_figure = generate_category_spending_chart(self.current_user)
+
+        buf = io.BytesIO()
+        try:
+            chart_figure.savefig(buf, format='png', dpi=100, bbox_inches='tight')
+            buf.seek(0)
+            chart_image = Image.open(buf)
+
+            chart_photo = ImageTk.PhotoImage(chart_image)
+
+            self.spending_chart.configure(image=chart_photo, text="")
+            self.spending_chart.image = chart_photo  # Keep a reference to avoid garbage collection
+        finally:
+            buf.close()
 
     # Graphs, Budgets, Expenses, Recurrent Charges,
     def back_to_login(self):

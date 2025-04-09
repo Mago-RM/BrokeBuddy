@@ -54,6 +54,8 @@ class BrokeBuddyApp(ctk.CTk):
 
         if user and hasattr(frame, "set_user"):
             frame.set_user(user)
+        if name == "dashboard":
+            frame.generate_spending_chart()
 
         frame.pack(expand=True, fill="both")
 

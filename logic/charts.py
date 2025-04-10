@@ -13,11 +13,10 @@ def generate_category_spending_chart(user):
         data["Spending"].append(b.spent)
 
     df = pd.DataFrame(data)
-    fig, ax = plt.subplots(figsize=(5, 3), dpi=100)
+    fig, ax = plt.subplots(figsize=(5, 3), dpi=100, constrained_layout=True)
     ax.bar(df["Category"], df["Spending"], color="skyblue")
-    ax.set_title("Monthly Spending by Category")
-    ax.set_ylabel("Amount ($)")
-    ax.set_xlabel("Category")
-    fig.tight_layout()
+    ax.set_title("Monthly Spending by Category", fontsize=12)
+    ax.set_ylabel("Amount ($)", fontsize=10)
+    ax.set_xlabel("Category", fontsize=10)
 
     return fig

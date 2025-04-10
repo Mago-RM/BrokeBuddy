@@ -3,8 +3,13 @@ import customtkinter as ctk
 from customtkinter import CTkImage
 from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
+import io
+
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
+from logic.charts import generate_category_spending_chart
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
@@ -14,6 +19,7 @@ ctk.set_default_color_theme("green")
 class dashFrame(ctk.CTkFrame):
     def __init__(self, master, switch_to):
         super().__init__(master)
+        self.current_user = None
         self.switch_to = switch_to
 
         try:
@@ -195,34 +201,54 @@ class dashFrame(ctk.CTkFrame):
         self.back_button.pack(pady=10)
 
     #               - - - - - - - > A C T I O N S  < - - - - - -
-    def set_user(self, user_id):
-        self.current_user_id = user_id
+    def set_user(self, user):
+        self.current_user = user
+
+    def generate_spending_chart(self):
+        if self.current_user is None:
+            tk.messagebox.showwarning("Missing User", "Please log in to generate your spending chart.")
+            return
+
+        chart_figure = generate_category_spending_chart(self.current_user)
+
+        buf = io.BytesIO()
+        try:
+            chart_figure.savefig(buf, format='png', dpi=100, bbox_inches='tight')
+            buf.seek(0)
+            chart_image = Image.open(buf)
+
+            chart_photo = CTkImage(dark_image=chart_image, light_image=chart_image, size=(240, 120))
+
+            self.spending_chart.configure(image=chart_photo, text="")
+            self.spending_chart.image = chart_photo  # Keep a reference to avoid garbage collection
+        finally:
+            buf.close()
 
     # Graphs, Budgets, Expenses, Recurrent Charges,
     def back_to_login(self):
-        self.switch_to("login", user_id = self.current_user_id)
+        self.switch_to("login", user = self.current_user)
 
     def open_income(self):
-        self.switch_to("income", user_id = self.current_user_id)
+        self.switch_to("income", user = self.current_user)
 
     def open_cards(self):
-        self.switch_to("cards", user_id = self.current_user_id)
+        self.switch_to("cards", user = self.current_user)
 
     def open_savings(self):
-        self.switch_to("savings", user_id = self.current_user_id)
+        self.switch_to("savings", user = self.current_user)
 
     def open_recurrent(self):
-        self.switch_to("recurrent", user_id = self.current_user_id)
+        self.switch_to("recurrent", user = self.current_user)
 
     def open_expenses(self):
-        self.switch_to("expenses", user_id = self.current_user_id)
+        self.switch_to("expenses", user = self.current_user)
 
     def open_budgets(self):
-        self.switch_to("budgets", user_id = self.current_user_id)
+        self.switch_to("budgets", user = self.current_user)
 
     def open_graphs(self):
-        self.switch_to("graphs", user_id = self.current_user_id)
+        self.switch_to("graphs", user = self.current_user)
 
     def open_account(self):
-        self.switch_to("account", user_id= self.current_user_id)
+        self.switch_to("account", user= self.current_user)
 

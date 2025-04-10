@@ -21,7 +21,7 @@ class WelcomeFrame(ctk.CTkFrame):
         self.rowconfigure(0, weight=1)
 
         self.container = ctk.CTkFrame(self, fg_color="#4CAF50")
-        self.container.grid(row=0, column=0, sticky="nsew", padx=60, pady=60)
+        self.container.grid(row=0, column=0, sticky="nsew")
 
         self.container.columnconfigure(0, weight=1)
         self.container.rowconfigure(0, weight=1)

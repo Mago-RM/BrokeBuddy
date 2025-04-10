@@ -21,12 +21,17 @@ class BrokeBuddyApp(ctk.CTk):
         super().__init__()
 
         self.title("BrokeBuddy 🐷💸")
-        self.state("zoomed")  # Fullscreen on startup
+        self.attributes("-fullscreen", True)  # True fullscreen without taskbar
+        self.state("zoomed")
         self.configure(fg_color="#4CAF50")
 
         self.frames = {}
         self.create_frames()
         self.show_frame("welcome")
+
+        # Bind Escape to exit fullscreen mode, F11 to enter fullscreen
+        self.bind("<Escape>", self.exit_fullscreen)
+        self.bind("<F11>", self.toggle_fullscreen)
 
     #Aliases for all frames ("Views")
     def create_frames(self):
@@ -58,6 +63,20 @@ class BrokeBuddyApp(ctk.CTk):
             frame.generate_spending_chart()
 
         frame.pack(expand=True, fill="both")
+
+    def exit_fullscreen(self, event=None):
+        """
+        Exit fullscreen mode when Escape is pressed.
+        """
+        self.attributes("-fullscreen", False)
+
+    def toggle_fullscreen(self, event=None):
+        """
+            Toggle fullscreen mode on and off.
+        """
+        is_fullscreen = self.attributes("-fullscreen")
+        self.attributes("-fullscreen", not is_fullscreen)
+
 
 #               - - - - - - - > S T A R T   L O O P  < - - - - - -
 if __name__ == "__main__":

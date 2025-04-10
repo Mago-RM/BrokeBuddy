@@ -204,7 +204,6 @@ class dashFrame(ctk.CTkFrame):
     def set_user(self, user):
         self.current_user = user
 
-    # TODO: fix sizing of chart and fix axis numbering
     def generate_spending_chart(self):
         if self.current_user is None:
             tk.messagebox.showwarning("Missing User", "Please log in to generate your spending chart.")
@@ -218,7 +217,7 @@ class dashFrame(ctk.CTkFrame):
             buf.seek(0)
             chart_image = Image.open(buf)
 
-            chart_photo = ImageTk.PhotoImage(chart_image)
+            chart_photo = CTkImage(dark_image=chart_image, light_image=chart_image, size=(240, 120))
 
             self.spending_chart.configure(image=chart_photo, text="")
             self.spending_chart.image = chart_photo  # Keep a reference to avoid garbage collection

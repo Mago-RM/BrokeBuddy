@@ -9,7 +9,8 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
-from logic.charts import generate_category_spending_chart
+from logic.charts import *
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
@@ -54,29 +55,23 @@ class dashFrame(ctk.CTkFrame):
         )
         self.title_label.pack(pady=10)
 
-        # Spending chart placeholder
-        self.spending_chart = ctk.CTkLabel(
+        # Category spending's
+        self.spending_chart_canvas = tk.Canvas(
             self.inner_container,
-            text="[Spending Chart Placeholder]",
             width=240,
             height=120,
-            fg_color="white",
-            text_color="black",
-            corner_radius=10
+            bg="white"
         )
-        self.spending_chart.pack(pady=10)
+        self.spending_chart_canvas.pack(pady=10)
 
         # Savings progress
-        self.savings_progress = ctk.CTkLabel(
+        self.savings_chart_canvas = tk.Canvas(
             self.inner_container,
-            text="[Savings Progress Placeholder]",
             width=240,
-            height=60,
-            fg_color="white",
-            text_color="black",
-            corner_radius=10
+            height=120,
+            bg="white"
         )
-        self.savings_progress.pack(pady=10)
+        self.savings_chart_canvas.pack(pady=10)
 
         #               - - - - - - - > N A V I G A T I O N  ME N U    < - - - - - -
 
@@ -204,25 +199,17 @@ class dashFrame(ctk.CTkFrame):
     def set_user(self, user):
         self.current_user = user
 
-    def generate_spending_chart(self):
-        if self.current_user is None:
-            tk.messagebox.showwarning("Missing User", "Please log in to generate your spending chart.")
-            return
+    def show_spending_chart(self):
+        fig = generate_category_spending_chart(self.current_user)
+        chart_widget = FigureCanvasTkAgg(fig, self.spending_chart_canvas)
+        chart_widget.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+        chart_widget.draw()
 
-        chart_figure = generate_category_spending_chart(self.current_user)
-
-        buf = io.BytesIO()
-        try:
-            chart_figure.savefig(buf, format='png', dpi=100, bbox_inches='tight')
-            buf.seek(0)
-            chart_image = Image.open(buf)
-
-            chart_photo = CTkImage(dark_image=chart_image, light_image=chart_image, size=(240, 120))
-
-            self.spending_chart.configure(image=chart_photo, text="")
-            self.spending_chart.image = chart_photo  # Keep a reference to avoid garbage collection
-        finally:
-            buf.close()
+    def show_savings_chart(self):
+        fig = generate_savings_chart(self.current_user)
+        chart_widget = FigureCanvasTkAgg(fig, self.savings_chart_canvas)
+        chart_widget.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+        chart_widget.draw()
 
     # Graphs, Budgets, Expenses, Recurrent Charges,
     def back_to_login(self):

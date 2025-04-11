@@ -9,7 +9,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
-from logic.charts import generate_category_spending_chart
+from logic.charts import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 ctk.set_appearance_mode("light")
@@ -55,6 +55,7 @@ class dashFrame(ctk.CTkFrame):
         )
         self.title_label.pack(pady=10)
 
+        # Category spending's
         self.spending_chart_canvas = tk.Canvas(
             self.inner_container,
             width=240,
@@ -64,16 +65,13 @@ class dashFrame(ctk.CTkFrame):
         self.spending_chart_canvas.pack(pady=10)
 
         # Savings progress
-        self.savings_progress = ctk.CTkLabel(
+        self.savings_chart_canvas = tk.Canvas(
             self.inner_container,
-            text="[Savings Progress Placeholder]",
             width=240,
-            height=60,
-            fg_color="white",
-            text_color="black",
-            corner_radius=10
+            height=120,
+            bg="white"
         )
-        self.savings_progress.pack(pady=10)
+        self.savings_chart_canvas.pack(pady=10)
 
         #               - - - - - - - > N A V I G A T I O N  ME N U    < - - - - - -
 
@@ -201,9 +199,15 @@ class dashFrame(ctk.CTkFrame):
     def set_user(self, user):
         self.current_user = user
 
-    def generate_spending_chart(self):
+    def show_spending_chart(self):
         fig = generate_category_spending_chart(self.current_user)
         chart_widget = FigureCanvasTkAgg(fig, self.spending_chart_canvas)
+        chart_widget.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+        chart_widget.draw()
+
+    def show_savings_chart(self):
+        fig = generate_savings_chart(self.current_user)
+        chart_widget = FigureCanvasTkAgg(fig, self.savings_chart_canvas)
         chart_widget.get_tk_widget().pack(fill=tk.BOTH, expand=True)
         chart_widget.draw()
 

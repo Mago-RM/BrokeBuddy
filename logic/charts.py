@@ -20,3 +20,21 @@ def generate_category_spending_chart(user):
     ax.set_xlabel("Category", fontsize=10)
 
     return fig
+
+# TODO: maybe include logic to deal with when goal is met
+def generate_savings_chart(user):
+    current_savings = user.savings["current"]
+    remaining_goal = max(0, user.savings["goal"] - user.savings["current"])
+
+    data = [current_savings, remaining_goal]
+    labels = [
+        f"Current Savings\n${current_savings}",
+        f"Remaining Goal\n${remaining_goal}"
+    ]
+    colors = ["lightgreen", "lightcoral"]
+
+    fig, ax = plt.subplots(figsize=(5, 3), dpi=100, constrained_layout=True)
+    ax.pie(data, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+    ax.set_title("Savings Progress", fontsize=12)
+
+    return fig

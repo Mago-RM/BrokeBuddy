@@ -2,7 +2,8 @@
 # Connected to data.json for now.
 
 import json
-from logic.models import User, Card, Income, Expense, BudgetCategory, Transaction
+from logic.models import User, Card, Income, Expense, BudgetCategory, Transaction, SavingsAccount
+
 
 def create_user(user_id, file_path="data.json"):
     data = load_all_users(file_path)
@@ -35,10 +36,11 @@ def get_user(user_id, password_attempt, file_path="data.json"):
 
     user_data = data["users"][user_id]
     user = User(user_id)
-    user.cards = [Card(**c) for c in user_data.get("cards", [])]
+    user.cards = [Card.from_dict(c) for c in user_data.get("cards", [])]
     user.income = [Income(**i) for i in user_data.get("income", [])]
     user.recurring_expenses = [Expense(**e) for e in user_data.get("recurring_expenses", [])]
     user.budget_categories = {}
+    user.savings_accounts = [SavingsAccount.from_dict(s) for s in user_data.get("savings_accounts", [])]
     for b in user_data.get("budget_categories", []):
         category = BudgetCategory(b["name"], b["monthly_limit"])
         category.spent = b.get("spent", 0)
@@ -72,6 +74,27 @@ def load_all_users(file_path="data.json"):
 def save_all_users(data, file_path="data.json"):
     with open(file_path, "w") as f:
         json.dump(data, f, indent=4)
+
+
+def save_single_user(user: User):
+    """
+    Saves the updated user data while preserving their password.
+    """
+
+    # Load full user database
+    all_data = load_all_users()
+
+    # Get original password
+    original_user_data = all_data["users"].get(user.user_id, {})
+    password = original_user_data.get("password", "")
+
+    # Update and preserve password
+    updated_data = user.to_dict()
+    updated_data["password"] = password
+
+    # Save back to database
+    all_data["users"][user.user_id] = updated_data
+    save_all_users(all_data)
 
 def login_menu():
     while True:

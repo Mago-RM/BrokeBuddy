@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="Changed views to pass User object instead of user_id">
+      <change afterPath="$PROJECT_DIR$/logic/savings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/cards.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/income.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/recurrent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/savings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BrokeBuddy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BrokeBuddy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/charts.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/charts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/dashboard.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,12 +41,12 @@
     &quot;assignee&quot;: &quot;Mago-RM&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Mago-RM/BrokeBuddy.git",
-    "accountId": "97b83bab-a746-4c36-b361-641b974f3482"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Mago-RM/BrokeBuddy.git&quot;,
+    &quot;accountId&quot;: &quot;97b83bab-a746-4c36-b361-641b974f3482&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -53,13 +62,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.UI.executor": "Run",
+    "Python.charts.executor": "Run",
     "Python.dashboard.executor": "Run",
     "Python.main.executor": "Run",
     "Python.menu.executor": "Run",
     "Python.ui.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "tien",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -176,10 +186,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="Changed views to pass User object instead of user_id" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1744586995634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$main.coverage" NAME="main Coverage Results" MODIFIED="1743550806731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$charts.coverage" NAME="charts Coverage Results" MODIFIED="1744562146463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logic" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$ui.coverage" NAME="ui Coverage Results" MODIFIED="1743957452758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$menu.coverage" NAME="menu Coverage Results" MODIFIED="1743996118816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/BrokeBuddy$main.coverage" NAME="main Coverage Results" MODIFIED="1743550806731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/BrokeBuddy$dashboard.coverage" NAME="dashboard Coverage Results" MODIFIED="1744003155203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
-    <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1744003161437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$dashboard.coverage" NAME="dashboard Coverage Results" MODIFIED="1744565995485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
   </component>
 </project>

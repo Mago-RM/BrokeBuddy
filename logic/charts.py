@@ -8,10 +8,20 @@ import pandas as pd
 
 def generate_category_spending_chart(user):
     data = defaultdict(list)
+
     for b in user.budget_categories.values():
         data["Category"].append(b.name)
         data["Spending"].append(b.spent)
 
+    # Check if data is empty
+    if not data["Category"] or not data["Spending"]:
+        print("No category spending data — showing fallback chart.")
+        fig, ax = plt.subplots(figsize=(5, 3), dpi=100, constrained_layout=True)
+        ax.set_title("No Spending Data Available", fontsize=12)
+        ax.axis("off")  # Hide axes for a clean look
+        return fig
+
+    # Plot real data
     df = pd.DataFrame(data)
     fig, ax = plt.subplots(figsize=(5, 3), dpi=100, constrained_layout=True)
     ax.bar(df["Category"], df["Spending"], color="skyblue")
@@ -23,8 +33,25 @@ def generate_category_spending_chart(user):
 
 # TODO: maybe include logic to deal with when goal is met
 def generate_savings_chart(user):
+    # Check for missing or invalid savings data
+    if not user.savings or "current" not in user.savings or "goal" not in user.savings:
+        print("Savings data missing — showing fallback chart.")
+        fig, ax = plt.subplots(figsize=(5, 3), dpi=100, constrained_layout=True)
+        ax.set_title("No Savings Data Available", fontsize=12)
+        ax.axis("off")
+        return fig
+
     current_savings = user.savings["current"]
-    remaining_goal = max(0, user.savings["goal"] - user.savings["current"])
+    goal = user.savings["goal"]
+    remaining_goal = max(0, goal - current_savings)
+
+    # If both values are 0, skip pie to avoid divide-by-zero
+    if current_savings == 0 and remaining_goal == 0:
+        print("Savings and goal are both zero — showing fallback chart.")
+        fig, ax = plt.subplots(figsize=(5, 3), dpi=100, constrained_layout=True)
+        ax.set_title("No Savings Progress Yet", fontsize=12)
+        ax.axis("off")
+        return fig
 
     data = [current_savings, remaining_goal]
     labels = [

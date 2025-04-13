@@ -5,6 +5,8 @@ from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
+from views.income import IncomeFrame
+from views.savings import SavingsFrame
 #Import Other Frames
 from views.welcomeFrame import WelcomeFrame
 from views.LoginSignup import LoginSignUpFrame
@@ -12,6 +14,9 @@ from views.SignIn import SignInFrame
 from views.SignUp import SignUpFrame
 from views.dashboard import dashFrame
 from views.account import AccountFrame
+from views.cards import CardsFrame
+from views.income import IncomeFrame
+from views.recurrent import RecurrentFrame
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
@@ -40,14 +45,15 @@ class BrokeBuddyApp(ctk.CTk):
         self.frames["signin"] = SignInFrame(self, switch_to=self.show_frame)
         self.frames["signup"] = SignUpFrame(self, switch_to=self.show_frame)
         self.frames["dashboard"] = dashFrame(self, switch_to=self.show_frame)
-        # TO DO
         self.frames["account"] = AccountFrame(self, switch_to=self.show_frame)
-        #self.frames["cards"] = CardsFrame(self, switch_to=self.show_frame)
-        #self.frames["income"] = IncomeFrame(self, switch_to=self.show_frame)
-        #self.frames["budget"] = BudgetFrame(self, switch_to=self.show_frame)
-        #self.frames["recurrent"] = RecurrentFrame(self, switch_to=self.show_frame)
-        #self.frames["expenses"] = ExpensesFrame(self, switch_to=self.show_frame)
-        # self.frames["savings"] = SavingsFrame(self, switch_to=self.show_frame)
+        self.frames["cards"] = CardsFrame(self, switch_to=self.show_frame)
+        self.frames["income"] = IncomeFrame(self, switch_to=self.show_frame)
+        self.frames["savings"] = SavingsFrame(self, switch_to=self.show_frame)
+        self.frames["recurrent"] = RecurrentFrame(self, switch_to=self.show_frame)
+
+        #To Do
+        # self.frames["budget"] = BudgetFrame(self, switch_to=self.show_frame) #Budget Is calculated based on Whats "left" after recurrent
+        #self.frames["expenses"] = ExpensesFrame(self, switch_to=self.show_frame) #Expenses are tied to a budget category  or "other/misc/onetime.."
         #self.frames["graphs"] = GraphsFrame(self, switch_to=self.show_frame)
 
     #Passes User to each Frame
@@ -59,11 +65,10 @@ class BrokeBuddyApp(ctk.CTk):
 
         if user and hasattr(frame, "set_user"):
             frame.set_user(user)
-        if name == "dashboard":
-            frame.show_spending_chart()
-            frame.show_savings_chart()
 
         frame.pack(expand=True, fill="both")
+        frame.update_idletasks()
+        frame.update()
 
     def exit_fullscreen(self, event=None):
         """
@@ -84,4 +89,4 @@ if __name__ == "__main__":
     app = BrokeBuddyApp()
     app.mainloop()
 
-#  TO DO NEXT: Implement All Views for Nav Bar
+

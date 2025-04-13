@@ -169,17 +169,108 @@
         },
         "mago": {
             "user_id": "mago",
-            "cards": [],
-            "income": [],
-            "recurring_expenses": [],
+            "cards": [
+                {
+                    "name": "Visa",
+                    "balance": 500.0,
+                    "type": "debit",
+                    "due_date": ""
+                },
+                {
+                    "name": "Amex",
+                    "balance": 3000.0,
+                    "type": "debit",
+                    "due_date": ""
+                },
+                {
+                    "name": "Discover",
+                    "balance": -800.0,
+                    "type": "credit",
+                    "due_date": "15"
+                }
+            ],
+            "income": [
+                {
+                    "name": "Cat Sitting",
+                    "amount": 200.0,
+                    "type": "one-time",
+                    "date_added": "2025-04-13"
+                },
+                {
+                    "name": "Scholarship",
+                    "amount": 2100.0,
+                    "type": "monthly",
+                    "date_added": "2025-04-13"
+                }
+            ],
+            "recurring_expenses": [
+                {
+                    "name": "Rent",
+                    "amount": 650.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "1",
+                    "is_membership": false
+                },
+                {
+                    "name": "Internet",
+                    "amount": 80.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "15",
+                    "is_membership": false
+                },
+                {
+                    "name": "Cellphone",
+                    "amount": 30.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "20",
+                    "is_membership": false
+                },
+                {
+                    "name": "Netflix",
+                    "amount": 15.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "20",
+                    "is_membership": true
+                },
+                {
+                    "name": "HBO",
+                    "amount": 15.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "20",
+                    "is_membership": true
+                }
+            ],
             "budget_categories": [],
             "transactions": [],
             "savings": {
                 "goal": 0,
                 "current": 0
             },
-            "password": "chiri",
-            "email": "user2mail@mail.com"
+            "savings_accounts": [
+                {
+                    "name": "Emergency Fund",
+                    "amount": 1800.0
+                },
+                {
+                    "name": "Tuition",
+                    "amount": 4000.0
+                },
+                {
+                    "name": "Vacay",
+                    "amount": 600.0
+                }
+            ],
+            "password": "chiri"
         }
     }
 }

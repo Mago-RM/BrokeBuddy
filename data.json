@@ -1,22 +1,27 @@
 {
     "users": {
         "user": {
-            "password": "pass",
+            "user_id": "user",
             "cards": [
                 {
                     "name": "Main Bank",
-                    "balance": 1200
+                    "balance": 1499.0,
+                    "type": "debit",
+                    "due_date": ""
                 },
                 {
                     "name": "Amex",
-                    "balance": 800.0
+                    "balance": 800.0,
+                    "type": "debit",
+                    "due_date": ""
                 }
             ],
             "income": [
                 {
-                    "source": "Job",
+                    "name": "Job",
                     "amount": 3000,
-                    "frequency": "monthly"
+                    "type": "monthly",
+                    "date_added": ""
                 }
             ],
             "recurring_expenses": [
@@ -24,29 +29,30 @@
                     "name": "Rent",
                     "amount": 1200.0,
                     "category": "Housing",
-                    "recurring": true
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "",
+                    "is_membership": false
                 },
                 {
                     "name": "Netflix",
                     "amount": 15.0,
                     "category": "Membership",
-                    "recurring": true
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "",
+                    "is_membership": true
                 }
             ],
             "budget_categories": [
                 {
                     "name": "Groceries",
                     "monthly_limit": 400,
-                    "spent": 150
+                    "spent": 500
                 },
                 {
-                    "name": "Fun",
-                    "monthly_limit": 200,
-                    "spent": 80
-                },
-                {
-                    "name": "Coffee",
-                    "monthly_limit": 50.0,
+                    "name": "Sports",
+                    "monthly_limit": 1.0,
                     "spent": 0
                 }
             ],
@@ -73,21 +79,27 @@
             "savings": {
                 "goal": 1000,
                 "current": 320
-            }
+            },
+            "savings_accounts": [],
+            "password": "pass"
         },
         "alice123": {
+            "user_id": "alice123",
             "password": "alice",
             "cards": [
                 {
                     "name": "Visa",
-                    "balance": 1800
+                    "balance": 1800,
+                    "type": "debit",
+                    "due_date": ""
                 }
             ],
             "income": [
                 {
-                    "source": "Freelance",
+                    "name": "Freelance",
                     "amount": 4200,
-                    "frequency": "monthly"
+                    "type": "monthly",
+                    "date_added": ""
                 }
             ],
             "recurring_expenses": [
@@ -95,7 +107,10 @@
                     "name": "Spotify",
                     "amount": 10.0,
                     "category": "Membership",
-                    "recurring": true
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "",
+                    "is_membership": true
                 }
             ],
             "budget_categories": [
@@ -122,21 +137,26 @@
                 "goal": 2000,
                 "current": 600
             },
+            "savings_accounts": [],
             "email": "alice@gmail.com"
         },
         "bob456": {
+            "user_id": "bob456",
             "password": "passbob",
             "cards": [
                 {
                     "name": "Checking",
-                    "balance": 600
+                    "balance": 600,
+                    "type": "debit",
+                    "due_date": ""
                 }
             ],
             "income": [
                 {
-                    "source": "Part-time",
+                    "name": "Part-time",
                     "amount": 1500,
-                    "frequency": "monthly"
+                    "type": "monthly",
+                    "date_added": ""
                 }
             ],
             "recurring_expenses": [
@@ -144,7 +164,10 @@
                     "name": "Phone Bill",
                     "amount": 40.0,
                     "category": "Utilities",
-                    "recurring": true
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "",
+                    "is_membership": false
                 }
             ],
             "budget_categories": [
@@ -165,7 +188,8 @@
             "savings": {
                 "goal": 500,
                 "current": 120
-            }
+            },
+            "savings_accounts": []
         },
         "mago": {
             "user_id": "mago",
@@ -250,7 +274,13 @@
                     "is_membership": true
                 }
             ],
-            "budget_categories": [],
+            "budget_categories": [
+                {
+                    "name": "Fun",
+                    "monthly_limit": 100.0,
+                    "spent": 0
+                }
+            ],
             "transactions": [],
             "savings": {
                 "goal": 0,

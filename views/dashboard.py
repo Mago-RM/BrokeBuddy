@@ -16,6 +16,7 @@ from PIL import Image, ImageTk
 from datetime import datetime
 from logic.charts import generate_category_spending_chart, generate_savings_chart
 from logic.auth import save_single_user
+from logic.savings import calculate_estimated_savings_for_user
 
 class dashFrame(ctk.CTkFrame):
     def __init__(self, master, switch_to):
@@ -71,6 +72,8 @@ class dashFrame(ctk.CTkFrame):
         self.budget_summary = ctk.CTkFrame(self.container, fg_color="white", corner_radius=10)
         self.budget_summary.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
         ctk.CTkLabel(self.budget_summary, text="🧾 Budget Usage", font=("Arial Rounded MT Bold", 14)).pack(pady=8)
+        self.budget_usage_container = ctk.CTkScrollableFrame(self.budget_summary, fg_color="white", corner_radius=10)
+        self.budget_usage_container.pack(fill="both", expand=True, padx=10, pady=5)
 
         # Spending Chart
         self.spending_chart_canvas = tk.Canvas(self.container, bg="white", height=160)
@@ -93,8 +96,6 @@ class dashFrame(ctk.CTkFrame):
 
     def set_user(self, user):
         self.current_user = user
-
-        from logic.savings import calculate_estimated_savings_for_user
         actual, budget = calculate_estimated_savings_for_user(user)
         self.savings_budget_label.configure(text=f"If on budget: ${budget:.2f}")
         self.savings_actual_label.configure(text=f"Actual trend: ${actual:.2f}")
@@ -109,8 +110,49 @@ class dashFrame(ctk.CTkFrame):
             ctk.CTkLabel(self.alert_box, text=msg, text_color="#BF360C", font=("Arial", 12)).pack(anchor="w", padx=15, pady=2)
 
         self.show_spending_chart()
+        self.render_budget_usage()
+
         self.update_idletasks()
         self.update()
+
+    def render_budget_usage(self):
+        for widget in self.budget_usage_container.winfo_children():
+            widget.destroy()
+
+        if not self.current_user.budget_categories:
+            ctk.CTkLabel(self.budget_usage_container, text="No budget categories yet.", font=("Arial", 12)).pack(
+                pady=10)
+            return
+
+        for name, cat in self.current_user.budget_categories.items():
+            spent = cat.spent
+            limit = cat.monthly_limit
+            percent_used = min(spent / limit if limit else 0, 1.0)
+            is_over = spent > limit
+
+            # Colors: Green if within budget, red if over limit
+            bg_color = "#FFEBEE" if is_over else "#E8F5E9"
+            bar_color = "#C62828" if is_over else "#43A047"
+            text_color = "#B71C1C" if is_over else "black"
+            border_color = "#C62828" if is_over else "#43A047"
+
+            frame = ctk.CTkFrame(self.budget_usage_container, fg_color=bg_color, border_color=border_color,
+                                 border_width=2, corner_radius=10)
+            frame.pack(padx=10, pady=8, fill="x")
+
+            # Header
+            ctk.CTkLabel(frame, text=f"📁 {name}", font=("Arial Rounded MT Bold", 14), text_color=text_color).pack(
+                anchor="w", padx=15, pady=(8, 2))
+            ctk.CTkLabel(frame, text=f"${spent:.2f} / ${limit:.2f}", font=("Arial", 12), text_color="gray").pack(
+                anchor="w", padx=15)
+
+            # Budget usage bar
+            bar_container = ctk.CTkFrame(frame, fg_color="#EEEEEE", height=10, corner_radius=5)
+            bar_container.pack(padx=15, pady=10, fill="x")
+
+            # Filling of the usage bar
+            bar_fill = ctk.CTkFrame(bar_container, fg_color=bar_color, corner_radius=5)
+            bar_fill.place(relx=0, rely=0, relheight=1, relwidth=percent_used)
 
     def show_spending_chart(self):
         for widget in self.spending_chart_canvas.winfo_children():

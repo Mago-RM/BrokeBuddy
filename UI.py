@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
-from views.income import IncomeFrame
 from views.savings import SavingsFrame
 #Import Other Frames
 from views.welcomeFrame import WelcomeFrame
@@ -18,6 +17,7 @@ from views.cards import CardsFrame
 from views.income import IncomeFrame
 from views.recurrent import RecurrentFrame
 from views.budgetFrame import BudgetFrame
+from views.graphs import GraphsFrame
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
@@ -55,7 +55,7 @@ class BrokeBuddyApp(ctk.CTk):
         #To Do
         self.frames["budgets"] = BudgetFrame(self, switch_to=self.show_frame) #Budget Is calculated based on Whats "left" after recurrent
         #self.frames["expenses"] = ExpensesFrame(self, switch_to=self.show_frame) #Expenses are tied to a budget category  or "other/misc/onetime.."
-        #self.frames["graphs"] = GraphsFrame(self, switch_to=self.show_frame)
+        self.frames["graphs"] = GraphsFrame(self, switch_to=self.show_frame)
 
     #Passes User to each Frame
     def show_frame(self, name, user=None):

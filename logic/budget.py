@@ -1,6 +1,40 @@
 '''
     Calculating Functions
 '''
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
+def convert_due_date_input(mmdd: str) -> str:
+    try:
+        month, day = map(int, mmdd.split("/"))
+        year = datetime.now().year
+        due_date = datetime(year, month, day)
+        return due_date.strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+def update_due_dates(user):
+    today = datetime.today().date()
+
+    for exp in user.recurring_expenses:
+        if not exp.due_date:
+            continue
+        try:
+            due = datetime.strptime(exp.due_date, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+
+        while due < today:
+            if exp.frequency == "weekly":
+                due += timedelta(days=7)
+            elif exp.frequency == "bi-weekly":
+                due += timedelta(days=14)
+            elif exp.frequency == "monthly":
+                due += relativedelta(months=1)
+            else:
+                break
+
+        exp.due_date = due.strftime("%Y-%m-%d")
 
 def get_remaining_budget(category):
     """Returns the remaining amount in a budget category."""

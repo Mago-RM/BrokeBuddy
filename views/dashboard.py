@@ -1,13 +1,3 @@
-import matplotlib as mpl
-import tkinter.messagebox as messagebox
-import io
-
-from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
-from logic.models import User
-from logic.charts import *
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
-# Updated dashboard layout and logic with full layout
 import tkinter as tk
 import customtkinter as ctk
 from customtkinter import CTkImage
@@ -17,6 +7,7 @@ from datetime import datetime
 from logic.charts import generate_category_spending_chart, generate_savings_chart
 from logic.auth import save_single_user
 from logic.savings import calculate_estimated_savings_for_user
+from logic.budget import update_due_dates
 
 class dashFrame(ctk.CTkFrame):
     def __init__(self, master, switch_to):
@@ -109,6 +100,7 @@ class dashFrame(ctk.CTkFrame):
             msg = f"• {name} is due in {days_left} day(s) (on the {due_day})"
             ctk.CTkLabel(self.alert_box, text=msg, text_color="#BF360C", font=("Arial", 12)).pack(anchor="w", padx=15, pady=2)
 
+        update_due_dates(user)
         self.show_spending_chart()
         self.render_budget_usage()
 

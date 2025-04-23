@@ -49,6 +49,15 @@ class BudgetFrame(ctk.CTkFrame):
             ctk.CTkLabel(frame, text=f"📋 {name}", font=("Arial Rounded MT Bold", 16), text_color="black").pack(anchor="w", padx=15, pady=(10, 2))
             ctk.CTkLabel(frame, text=f"💸 ${cat.spent:.2f} / ${cat.monthly_limit:.2f}", font=("Arial", 13), text_color="gray").pack(anchor="w", padx=15)
 
+            if name == "Recurrent":
+                warning = ctk.CTkLabel(
+                    frame,
+                    text="⚠️ Deleting this will remove all recurring expenses!",
+                    font=("Arial", 11),
+                    text_color="red"
+                )
+                warning.pack(anchor="w", padx=15, pady=(4, 0))
+
             action_frame = ctk.CTkFrame(frame, fg_color="transparent")
             action_frame.pack(anchor="e", padx=10, pady=10)
 
@@ -123,6 +132,11 @@ class BudgetFrame(ctk.CTkFrame):
         name = list(self.current_user.budget_categories.keys())[index]
         confirm = messagebox.askyesno("Confirm", f"Delete category '{name}'?")
         if confirm:
+            if name == "Recurrent":
+                # Delete all recurring expenses
+                self.current_user.recurring_expenses.clear()
+                messagebox.showinfo("Deleted", "All recurring expenses have also been deleted.")
+
             del self.current_user.budget_categories[name]
             save_single_user(self.current_user)
             self.render_categories()

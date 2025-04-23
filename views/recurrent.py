@@ -1,30 +1,11 @@
+import re
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import messagebox
 from logic.auth import save_single_user
+from logic.budget import convert_due_date_input
 from logic.models import Expense
-from datetime import datetime
-
-import tkinter as tk
-import customtkinter as ctk
-from tkinter import messagebox
-from logic.auth import save_single_user
-from logic.models import Expense
-from datetime import datetime
-
-import tkinter as tk
-import customtkinter as ctk
-from tkinter import messagebox
-from logic.auth import save_single_user
-from logic.models import Expense
-from datetime import datetime
-
-import tkinter as tk
-import customtkinter as ctk
-from tkinter import messagebox
-from logic.auth import save_single_user
-from logic.models import Expense
-from datetime import datetime
+from logic.models import BudgetCategory
 
 
 class RecurrentFrame(ctk.CTkFrame):
@@ -130,7 +111,7 @@ class RecurrentFrame(ctk.CTkFrame):
     def open_add_recurrent_popup(self):
         popup = ctk.CTkToplevel(self)
         popup.title("Add Recurrent Charge")
-        popup.geometry("360x420")
+        popup.geometry("360x460")
         popup.transient(self)
         popup.grab_set()
 
@@ -146,7 +127,7 @@ class RecurrentFrame(ctk.CTkFrame):
         toggle = ctk.CTkSegmentedButton(popup, values=["weekly", "bi-weekly", "monthly"], variable=type_var)
         toggle.pack(padx=20, pady=5)
 
-        due_date_entry = ctk.CTkEntry(popup, placeholder_text="Due Date (MM/DD)")
+        due_date_entry = ctk.CTkEntry(popup, placeholder_text="First Due Date (MM/DD)")
         due_date_entry.pack(pady=5, padx=20, fill="x")
 
         membership_var = tk.BooleanVar()
@@ -157,17 +138,57 @@ class RecurrentFrame(ctk.CTkFrame):
             try:
                 name = name_entry.get()
                 amount = float(amount_entry.get())
+                if amount <= 0:
+                    raise ValueError("Amount must be positive")
+
                 recurring_type = type_var.get()
-                due_date = due_date_entry.get()
+                due_raw = due_date_entry.get().strip()
+
+                # Validate MM/DD format
+                if not re.match(r"^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])$", due_raw):
+                    messagebox.showerror("Invalid Date", "Enter due date in MM/DD format (e.g., 04/15)")
+                    return
+
+                due_date = convert_due_date_input(due_raw)
                 is_member = membership_var.get()
 
-                if not name:
-                    raise ValueError("Missing name")
+                # Ensure Recurrent category exists
+                if "Recurrent" not in self.current_user.budget_categories:
+                    cat_popup = ctk.CTkToplevel(self)
+                    cat_popup.title("Create 'Recurrent' Category")
+                    cat_popup.geometry("300x200")
+                    cat_popup.transient(self)
+                    cat_popup.grab_set()
 
+                    ctk.CTkLabel(cat_popup, text="Monthly limit for 'Recurrent' category:").pack(pady=10)
+                    limit_entry = ctk.CTkEntry(cat_popup, placeholder_text="e.g., 200")
+                    limit_entry.pack(pady=5, padx=20)
+
+                    def create_category():
+                        try:
+                            limit = float(limit_entry.get())
+                            from logic.models import BudgetCategory
+                            self.current_user.budget_categories["Recurrent"] = BudgetCategory("Recurrent", limit)
+                            save_single_user(self.current_user)
+                            cat_popup.destroy()
+                        except ValueError:
+                            messagebox.showerror("Invalid Input", "Limit must be a number.")
+
+                    ctk.CTkButton(cat_popup, text="✅ Create", command=create_category).pack(pady=10)
+                    return
+
+                # Convert to monthly cost
+                monthly_amount = amount
+                if recurring_type == "weekly":
+                    monthly_amount *= 4
+                elif recurring_type == "bi-weekly":
+                    monthly_amount *= 2
+
+                from logic.models import Expense
                 new_expense = Expense(
                     name=name,
                     amount=amount,
-                    category="recurrent",
+                    category="Recurrent",
                     recurring=True,
                     frequency=recurring_type,
                     due_date=due_date,
@@ -175,6 +196,8 @@ class RecurrentFrame(ctk.CTkFrame):
                 )
 
                 self.current_user.recurring_expenses.append(new_expense)
+                self.current_user.budget_categories["Recurrent"].add_expense(monthly_amount)
+
                 save_single_user(self.current_user)
                 self.render_recurrents()
                 popup.destroy()
@@ -186,6 +209,9 @@ class RecurrentFrame(ctk.CTkFrame):
 
     def edit_recurrent(self, index):
         exp = self.current_user.recurring_expenses[index]
+        old_amount = exp.amount
+        old_type = exp.frequency
+
         popup = ctk.CTkToplevel(self)
         popup.title("Edit Recurrent")
         popup.geometry("360x420")
@@ -214,15 +240,43 @@ class RecurrentFrame(ctk.CTkFrame):
 
         def save_changes():
             try:
+                new_amount = float(amount_entry.get())
+                new_type = type_var.get()
+
+                if new_amount <= 0:
+                    raise ValueError("Amount must be a positive number.")
+
+                # Monthly equivalents
+                old_monthly = old_amount
+                if old_type == "weekly":
+                    old_monthly *= 4
+                elif old_type == "bi-weekly":
+                    old_monthly *= 2
+
+                new_monthly = new_amount
+                if new_type == "weekly":
+                    new_monthly *= 4
+                elif new_type == "bi-weekly":
+                    new_monthly *= 2
+
+                # Update category budget
+                category = self.current_user.budget_categories.get("Recurrent")
+                if category:
+                    category.spent -= old_monthly
+                    category.spent += new_monthly
+                    category.spent = max(0, category.spent)
+
+                # Update the expense
                 exp.name = name_entry.get()
-                exp.amount = float(amount_entry.get())
-                exp.frequency = type_var.get()
+                exp.amount = new_amount
+                exp.frequency = new_type
                 exp.due_date = due_date_entry.get()
                 exp.is_membership = membership_var.get()
 
                 save_single_user(self.current_user)
                 self.render_recurrents()
                 popup.destroy()
+
             except ValueError:
                 messagebox.showerror("Error", "Invalid input")
 
@@ -231,6 +285,19 @@ class RecurrentFrame(ctk.CTkFrame):
     def delete_recurrent(self, index):
         confirm = messagebox.askyesno("Confirm", "Delete this recurrent charge?")
         if confirm:
+            expense = self.current_user.recurring_expenses[index]
+
+            monthly_cost = expense.amount
+            if expense.frequency == "weekly":
+                monthly_cost *= 4
+            elif expense.frequency == "bi-weekly":
+                monthly_cost *= 2
+
+            category = self.current_user.budget_categories.get("Recurrent")
+            if category:
+                category.spent -= monthly_cost
+                category.spent = max(0, category.spent)
+
             self.current_user.recurring_expenses.pop(index)
             save_single_user(self.current_user)
             self.render_recurrents()

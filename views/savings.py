@@ -59,7 +59,7 @@ class SavingsFrame(ctk.CTkFrame):
         income = sum(i.amount if i.type == "monthly" else i.amount * 4 for i in self.current_user.income)
         credit_due = sum(abs(c.balance) * 0.1 for c in self.current_user.cards if c.type == "credit")
 
-        actual_exp = sum(e.amount if e.type == "monthly" else e.amount * 4 for e in self.current_user.recurring_expenses)
+        actual_exp = sum(e.amount if e.frequency == "monthly" else e.amount * 4 for e in self.current_user.recurring_expenses)
         budgeted_exp = sum(cat.monthly_limit for cat in self.current_user.budget_categories.values())
 
         actual_savings = max(0, income - actual_exp - credit_due)

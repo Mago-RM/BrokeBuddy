@@ -1,11 +1,12 @@
-#Console Menu to Test Logic is Working before implementing UI
+# Console Menu Playground to Test Logic is Working before implementing UI
+# Is now depreciated, may not work fully
 
-from logic.storage import load_user_data, save_user_data
+from logic.storage import save_user_data
 from logic.models import Card, Income, Expense, BudgetCategory, Transaction
-from logic.auth import create_user, get_user, delete_user, list_users, login_menu  # if login_menu is moved to auth, or define it in menu.py
+from logic.auth import login_menu  # if login_menu is moved to auth, or define it in menu.py
 
 #This reads straight from json file.
-#user = load_user_data("data.json")
+
 
 #Use this to check for password
 #user = login_menu()
@@ -144,7 +145,6 @@ def add_expense():
         print("Invalid amount. Please enter a positive value.")
         return
     category = input("Category: ")
-    # TODO: handle expenses and linking to budget category
     user.recurring_expenses.append(Expense(name, amount, category, recurring=True))
     save_user_data(user, "data.json")
     print("Expense added!")
@@ -160,7 +160,6 @@ def edit_expense():
             print("Invalid amount. Please enter a positive value.")
             return
         new_category = input("New category: ")
-        # TODO: handle expenses and linking to budget category
         user.recurring_expenses[choice_index].amount = new_amount
         user.recurring_expenses[choice_index].category = new_category
         save_user_data(user, "data.json")
@@ -169,7 +168,6 @@ def edit_expense():
         print("Invalid selection.")
 
 def delete_expense():
-    # TODO: handle expenses and linking to budget category
     print("\n-- Delete Recurring Expense --")
     for i, e in enumerate(user.recurring_expenses):
         print(f"{i+1}. {e.name}: ${e.amount} [{e.category}]")

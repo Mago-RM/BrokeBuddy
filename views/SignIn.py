@@ -3,8 +3,8 @@ import customtkinter as ctk
 from customtkinter import CTkImage
 from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
-from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
-from logic.models import User
+from logic.auth import get_user
+
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")

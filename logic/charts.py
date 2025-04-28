@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def generate_category_spending_chart(user):
+    """
+    Generate a bar chart visualizing monthly spending by category from user data.
+    """
     data = defaultdict(list)
 
     for b in user.budget_categories.values():
@@ -31,8 +34,11 @@ def generate_category_spending_chart(user):
 
     return fig
 
-# TODO: maybe include logic to deal with when goal is met
 def generate_savings_chart(user):
+    """
+    Generates a pie chart that visualizes the user's savings progress by comparing
+    current savings to the savings goal.
+    """
     # Check for missing or invalid savings data
     if not user.savings or "current" not in user.savings or "goal" not in user.savings:
         print("Savings data missing — showing fallback chart.")

@@ -40,7 +40,7 @@ def save_user_data(user, file_path):
         user_data = user.to_dict()
         user_id = user_data["user_id"]
 
-        # Check if the user already exists, and preserve the "password" field
+        # Check if the user already exists and preserve the "password" field
         if user_id in existing_data.get("users", {}):
             existing_user_data = existing_data["users"][user_id]
             if "password" in existing_user_data:

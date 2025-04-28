@@ -6,6 +6,15 @@ from logic.models import User, Card, Income, Expense, BudgetCategory, Transactio
 
 
 def create_user(user_id, file_path="data.json"):
+    """
+    Create a new user by adding it to the specified data file if it does not already exist.
+
+    This function checks whether the user with the given user ID already exists
+    in the file specified by `file_path`. If the user does not exist, the function
+    prompts for a password and creates a new user entry.
+
+    If the user ID already exists, the function does not create a new user.
+    """
     data = load_all_users(file_path)
     if user_id in data["users"]:
         print("User already exists.")
@@ -24,7 +33,12 @@ def create_user(user_id, file_path="data.json"):
     return user
 
 
-def get_user(user_id, password_attempt, file_path="data.json"):
+def get_user(user_id, password_attempt="", file_path="data.json"):
+    """
+    Retrieves and returns a user object after verifying the password attempt and loading
+    the user's data. It validates the given user ID and its password. If the validation
+    succeeds, it reconstructs the user's data and returns it as a User object, else None.
+    """
     data = load_all_users(file_path)
     if user_id not in data["users"]:
         return None  # User doesn't exist
@@ -52,6 +66,14 @@ def get_user(user_id, password_attempt, file_path="data.json"):
 
 
 def delete_user(user_id, file_path="data.json"):
+    """
+    Delete a user from the data storage.
+
+    This function removes a user identified by their user ID from the specified
+    data file. The storage is expected to be in JSON format, containing a "users"
+    key mapping user IDs to their data. If the user ID does not exist in the
+    storage, prints the message and does nothing.
+    """
     data = load_all_users(file_path)
     if user_id in data["users"]:
         del data["users"][user_id]
@@ -61,10 +83,17 @@ def delete_user(user_id, file_path="data.json"):
         print("User not found.")
 
 def list_users(file_path="data.json"):
+    """
+    Lists all the user names from a provided JSON file.
+    """
     data = load_all_users(file_path)
     return list(data["users"].keys())
 
 def load_all_users(file_path="data.json"):
+    """
+    Loads all users from the specified JSON file. If the file is not found, it will
+    return a dictionary with an empty "users" key.
+    """
     try:
         with open(file_path, "r") as f:
             return json.load(f)
@@ -72,6 +101,9 @@ def load_all_users(file_path="data.json"):
         return {"users": {}}
 
 def save_all_users(data, file_path="data.json"):
+    """
+    Save user data to a specified JSON file.
+    """
     with open(file_path, "w") as f:
         json.dump(data, f, indent=4)
 

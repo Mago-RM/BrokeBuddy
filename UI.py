@@ -1,10 +1,4 @@
-import tkinter as tk
 import customtkinter as ctk
-from customtkinter import CTkImage
-from PIL import Image, ImageTk
-import tkinter.messagebox as messagebox
-from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
-from logic.models import User
 from views.savings import SavingsFrame
 #Import Other Frames
 from views.welcomeFrame import WelcomeFrame

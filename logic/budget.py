@@ -5,6 +5,10 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 def convert_due_date_input(mmdd: str) -> str:
+    """
+    Converts a due date string in MM/DD format to a standardized YYYY-MM-DD string format. The year is
+    assumed to be the current calendar year. If the input is invalid, an empty string is returned.
+    """
     try:
         month, day = map(int, mmdd.split("/"))
         year = datetime.now().year
@@ -14,6 +18,12 @@ def convert_due_date_input(mmdd: str) -> str:
         return ""
 
 def update_due_dates(user):
+    """
+    Updates the due dates of recurring expenses for a user.
+    It adjusts the due date by adding the appropriate time delta (weekly,
+    bi-weekly, or monthly) until the due date is greater than or equal to
+    the current date.
+    """
     today = datetime.today().date()
 
     for exp in user.recurring_expenses:
@@ -35,25 +45,3 @@ def update_due_dates(user):
                 break
 
         exp.due_date = due.strftime("%Y-%m-%d")
-
-def get_remaining_budget(category):
-    """Returns the remaining amount in a budget category."""
-    return category.monthly_limit - category.spent
-
-def get_total_budget_summary(user):
-    """Returns (total_limit, total_spent, remaining) for all categories."""
-    total_limit = sum(cat.monthly_limit for cat in user.budget_categories.values())
-    total_spent = sum(cat.spent for cat in user.budget_categories.values())
-    remaining = total_limit - total_spent
-    return total_limit, total_spent, remaining
-
-def get_over_budget_categories(user):
-    """Returns a list of categories where spending exceeded the limit."""
-    return [cat for cat in user.budget_categories.values() if cat.spent > cat.monthly_limit]
-
-def record_transaction(user, transaction):
-    """Adds a transaction and updates its budget category's spent value."""
-    user.transactions.append(transaction)
-    category = user.budget_categories.get(transaction.category)
-    if category:
-        category.add_expense(transaction.amount)

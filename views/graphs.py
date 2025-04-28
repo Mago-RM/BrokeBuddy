@@ -73,24 +73,41 @@ class GraphsFrame(ctk.CTkFrame):
 
     def generate_monthly_trend_chart(self):
         """Generates Monthly Trend Chart"""
-        txns = self.current_user.transactions
-        if not txns:
-            fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
-            ax.set_title("No Transactions Yet")
-            ax.axis("off")
-            return fig
+        # Check if monthly_history exists and has data
+        monthly_history = self.current_user.monthly_history if self.current_user and self.current_user.monthly_history else {}
 
-        df = pd.DataFrame([t.to_dict() for t in txns])
-        df['date'] = pd.to_datetime(df['date'])
-        df['month'] = df['date'].dt.to_period('M').astype(str)
-        monthly_spending = df.groupby('month')['amount'].sum()
+        if monthly_history:
+            # Use data from monthly_history if available
+            months = list(monthly_history.keys())
+            spending_data = [
+                sum(category for category in month["budget_summary"].values())
+                for month in monthly_history.values()
+            ]
+        else:
+            # Uses transaction data if no monthly_history exists
+            if not self.current_user.transactions:
+                # Show empty chart if no transactions exist
+                fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
+                ax.set_title("No Data Available")
+                ax.axis("off")
+                return fig
 
+            df = pd.DataFrame([t.to_dict() for t in self.current_user.transactions])
+            df['date'] = pd.to_datetime(df['date'])
+            df['month'] = df['date'].dt.to_period('M').astype(str)
+            monthly_spending = df.groupby('month')['amount'].sum()
+
+            months = monthly_spending.index.tolist()
+            spending_data = monthly_spending.tolist()
+
+        # Generate the chart
         fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
-        monthly_spending.plot(kind='line', marker='o', ax=ax, color='teal')
+        ax.plot(months, spending_data, marker='o', color='teal', label="Spending")
         ax.set_title("Monthly Spending Trend")
         ax.set_ylabel("Total Spent ($)")
         ax.set_xlabel("Month")
         ax.grid(True)
+        ax.legend()
         return fig
 
     def back_to_dashboard(self):

@@ -1,13 +1,13 @@
+"""Handles Recurrent Expenses for User"""
+
 import re
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import messagebox
 from logic.auth import save_single_user
 from logic.budget import convert_due_date_input
-from logic.models import Expense
-from logic.models import BudgetCategory
 
-
+#Sets View
 class RecurrentFrame(ctk.CTkFrame):
     def __init__(self, master, switch_to):
         super().__init__(master)
@@ -67,10 +67,12 @@ class RecurrentFrame(ctk.CTkFrame):
         self.back_button.pack(side="left", padx=10)
 
     def set_user(self, user):
+        """Get User"""
         self.current_user = user
         self.render_recurrents()
 
     def render_recurrents(self):
+        """Gets Recurrent Expenses"""
         for widget in self.recurrent_container.winfo_children():
             widget.destroy()
 
@@ -109,6 +111,7 @@ class RecurrentFrame(ctk.CTkFrame):
             ctk.CTkButton(action_frame, text="Delete", width=60, fg_color="red", command=lambda i=idx: self.delete_recurrent(i)).pack(side="left", padx=5)
 
     def open_add_recurrent_popup(self):
+        """Adds a new Recurrent Expense. Opens a popup window."""
         popup = ctk.CTkToplevel(self)
         popup.title("Add Recurrent Charge")
         popup.geometry("360x460")
@@ -208,6 +211,7 @@ class RecurrentFrame(ctk.CTkFrame):
         ctk.CTkButton(popup, text="💾 Save", command=save).pack(pady=15)
 
     def edit_recurrent(self, index):
+        """Allows user to edit a posted Recurrent Expense """
         exp = self.current_user.recurring_expenses[index]
         old_amount = exp.amount
         old_type = exp.frequency
@@ -283,6 +287,7 @@ class RecurrentFrame(ctk.CTkFrame):
         ctk.CTkButton(popup, text="💾 Save Changes", command=save_changes).pack(pady=15)
 
     def delete_recurrent(self, index):
+        """Allows User to Delete a Recurrent Expense """
         confirm = messagebox.askyesno("Confirm", "Delete this recurrent charge?")
         if confirm:
             expense = self.current_user.recurring_expenses[index]
@@ -303,4 +308,5 @@ class RecurrentFrame(ctk.CTkFrame):
             self.render_recurrents()
 
     def back_to_dashboard(self):
+        """Switches back to Dashboard"""
         self.switch_to("dashboard", user=self.current_user)

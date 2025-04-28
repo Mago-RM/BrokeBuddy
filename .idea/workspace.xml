@@ -4,21 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="Changed views to pass User object instead of user_id">
-      <change afterPath="$PROJECT_DIR$/logic/savings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/cards.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/income.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/recurrent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/savings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/BrokeBuddy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BrokeBuddy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="Implemented Views for Recurrent, Income, Savings and Modify Dashboard look. &#10;&#10;Added save_single_user to auth.py&#10;&#10;Modified Models accordingly.">
+      <change afterPath="$PROJECT_DIR$/logic/resetter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/ExpensesFrame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/charts.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/charts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/LoginSignup.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/LoginSignup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/SignIn.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/SignIn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/budgetFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/budgetFrame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/graphs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/recurrent.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/recurrent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/savings.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/savings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/welcomeFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/welcomeFrame.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +47,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Mago-RM/BrokeBuddy.git&quot;,
-    &quot;accountId&quot;: &quot;97b83bab-a746-4c36-b361-641b974f3482&quot;
+    &quot;accountId&quot;: &quot;ced0e585-aea3-443f-ba17-e1e89b337a92&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -66,6 +69,7 @@
     "Python.dashboard.executor": "Run",
     "Python.main.executor": "Run",
     "Python.menu.executor": "Run",
+    "Python.savings.executor": "Run",
     "Python.ui.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -87,8 +91,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.26053.29" />
-        <option value="bundled-python-sdk-b1dbf8ef85a6-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.26053.29" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -101,6 +105,8 @@
       <option name="presentableId" value="Default" />
       <updated>1743548300912</updated>
       <workItem from="1743548302003" duration="37277000" />
+      <workItem from="1744738083161" duration="115000" />
+      <workItem from="1745768774167" duration="18555000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Structure Set Up.&#10;Json Reading working (temp)">
       <option name="closed" value="true" />
@@ -186,11 +192,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="Changed views to pass User object instead of user_id" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1744586995634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1745804795177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$main.coverage" NAME="main Coverage Results" MODIFIED="1743550806731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$charts.coverage" NAME="charts Coverage Results" MODIFIED="1744562146463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logic" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$ui.coverage" NAME="ui Coverage Results" MODIFIED="1743957452758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$menu.coverage" NAME="menu Coverage Results" MODIFIED="1743996118816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/BrokeBuddy$dashboard.coverage" NAME="dashboard Coverage Results" MODIFIED="1744565995485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$dashboard.coverage" NAME="dashboard Coverage Results" MODIFIED="1745796405532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$savings.coverage" NAME="savings Coverage Results" MODIFIED="1745804786752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
   </component>
 </project>

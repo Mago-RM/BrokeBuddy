@@ -1,4 +1,5 @@
-#Second Frame for user to Log In or Sign Up
+"""     Second Frame for user to Log In or Sign Up      """
+
 import tkinter as tk
 import customtkinter as ctk
 from customtkinter import CTkImage

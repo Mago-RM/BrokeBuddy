@@ -3,6 +3,7 @@ import customtkinter as ctk
 from tkinter import messagebox
 from logic.auth import save_single_user
 from logic.models import SavingsAccount
+import random
 
 class SavingsFrame(ctk.CTkFrame):
     def __init__(self, master, switch_to):
@@ -47,6 +48,15 @@ class SavingsFrame(ctk.CTkFrame):
 
         self.back_button = ctk.CTkButton(self.button_frame, text="⬅ Back", command=self.back_to_dashboard)
         self.back_button.pack(side="left", padx=10)
+
+        ctk.CTkButton(
+            self.container,
+            text="🌟 Month is Over – Save!",
+            fg_color="#388E3C",  # Green
+            text_color="white",
+            hover_color="#2e7d32",
+            command=self.confirm_month_end_savings
+        ).pack(pady=10)
 
     def set_user(self, user):
         self.current_user = user
@@ -172,3 +182,106 @@ class SavingsFrame(ctk.CTkFrame):
 
     def back_to_dashboard(self):
         self.switch_to("dashboard", user=self.current_user)
+
+
+    def confirm_month_end_savings(self):
+        actual, budget = self.calculate_estimated_savings()
+
+        answer = messagebox.askyesno(
+            "End of Month",
+            f"Did you actually save your projected amount of ${budget:.2f}?"
+        )
+
+        if answer:  # YES
+            self.auto_add_projected_savings(budget)
+        else:  # NO
+            self.open_manual_savings_popup()
+
+    def auto_add_projected_savings(self, amount):
+        popup = ctk.CTkToplevel(self)
+        popup.title("Choose Savings Account")
+        popup.geometry("350x250")
+        popup.transient(self)
+        popup.grab_set()
+
+        ctk.CTkLabel(popup, text="Where should we add it?", font=("Arial Rounded MT Bold", 16)).pack(pady=(20, 10))
+
+        savings_var = tk.StringVar()
+        savings_names = [acc.name for acc in self.current_user.savings_accounts]
+        savings_dropdown = ctk.CTkOptionMenu(popup, variable=savings_var, values=savings_names)
+        savings_dropdown.pack(pady=10, padx=20, fill="x")
+
+        def save_to_account():
+            selected_name = savings_var.get()
+            selected_account = next((acc for acc in self.current_user.savings_accounts if acc.name == selected_name),
+                                    None)
+            if selected_account:
+                selected_account.amount = selected_account.amount + amount
+                save_single_user(self.current_user)
+                compliments = [
+                    "🎉 You're crushing it!",
+                    "🌟 Another step closer to your dreams!",
+                    "🏆 Champion saver!",
+                    "🔥 Your future self is high-fiving you!",
+                    "💸 You made money moves today!",
+                    "🎯 Goals locked and loaded!",
+                    "🐾 One small step... one giant leap for your savings!",
+                    "🥂 Cheers to smart money habits!",
+                    "🚀 Savings rocket launching successfully!",
+                    "✨ Your wallet just did a happy dance!"
+                ]
+                messagebox.showinfo("Success", random.choice(compliments))
+                self.render_savings_accounts()
+                popup.destroy()
+
+        ctk.CTkButton(popup, text="💾 Confirm Savings", command=save_to_account).pack(pady=20)
+
+    def open_manual_savings_popup(self):
+        popup = ctk.CTkToplevel(self)
+        popup.title("Enter Savings Manually")
+        popup.geometry("350x300")
+        popup.transient(self)
+        popup.grab_set()
+
+        ctk.CTkLabel(popup, text="How much did you save?", font=("Arial Rounded MT Bold", 16)).pack(pady=(20, 10))
+
+        amount_entry = ctk.CTkEntry(popup, placeholder_text="Amount Saved ($)")
+        amount_entry.pack(pady=5, padx=20, fill="x")
+
+        ctk.CTkLabel(popup, text="Choose Savings Account:", font=("Arial Rounded MT Bold", 14)).pack(pady=(20, 5))
+
+        savings_var = tk.StringVar()
+        savings_names = [acc.name for acc in self.current_user.savings_accounts]
+        savings_dropdown = ctk.CTkOptionMenu(popup, variable=savings_var, values=savings_names)
+        savings_dropdown.pack(pady=5, padx=20, fill="x")
+
+        def save_manual_savings():
+            try:
+                amount = float(amount_entry.get())
+                if amount <= 0:
+                    raise ValueError("Amount must be positive.")
+
+                selected_name = savings_var.get()
+                selected_account = next(
+                    (acc for acc in self.current_user.savings_accounts if acc.name == selected_name), None)
+
+                if selected_account:
+                    selected_account.amount += amount
+                    save_single_user(self.current_user)
+                    compliments = [
+                        "🎉 You still made it happen!",
+                        "💪 Strong finish!",
+                        "🌈 Your savings journey continues!",
+                        "✨ Even a little goes a long way!"
+                    ]
+                    messagebox.showinfo("Success", random.choice(compliments))
+                    self.render_savings_accounts()
+                    popup.destroy()
+                else:
+                    messagebox.showerror("Error", "Savings account not found.")
+
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
+
+        ctk.CTkButton(popup, text="💾 Save", command=save_manual_savings).pack(pady=20)
+

@@ -1,16 +1,15 @@
+""" Defining Core Data Classes:
+                                 User, Cards, Income, Expense, Budget Category, Transactions."""
 from datetime import date as dt_date
 
-'''
-Defining Core Data Classes:
-          User, Cards, Income, Expense, Budget Category, Transactions.
-'''
 class User:
+    """Defines a User"""
     def __init__(self, user_id):
         self.user_id = user_id
         self.cards = []
         self.income = []
         self.recurring_expenses = []
-        self.budget_categories = {} # Change to a dict mapping categoryName:budgetObject
+        self.budget_categories = {}
         self.transactions = []
         self.savings = {"goal": 0, "current": 0}
         self.savings_accounts = []
@@ -36,7 +35,39 @@ class User:
             "savings_accounts": [s.to_dict() for s in self.savings_accounts],
         }
 
+    @staticmethod
+    def from_dict(data):
+        user = User(user_id=data["user_id"])
+
+        # Load cards
+        user.cards = [Card.from_dict(c) for c in data.get("cards", [])]
+
+        # Load income
+        user.income = [Income.from_dict(i) for i in data.get("income", [])]
+
+        # Load recurring expenses
+        user.recurring_expenses = [Expense.from_dict(e) for e in data.get("recurring_expenses", [])]
+
+        # Load budget categories (important!)
+        budget_categories_list = data.get("budget_categories", [])
+        user.budget_categories = {
+            cat["name"]: BudgetCategory(cat["name"], cat["monthly_limit"]) for cat in budget_categories_list
+        }
+
+        # Load transactions
+        user.transactions = [Transaction.from_dict(t) for t in data.get("transactions", [])]
+
+        # Load savings
+        user.savings = data.get("savings", {"goal": 0, "current": 0})
+
+        # Load savings accounts
+        user.savings_accounts = [SavingsAccount.from_dict(sa) for sa in data.get("savings_accounts", [])]
+
+        return user
+
+
 class Card:
+    """Defines a Card"""
     def __init__(self, name, balance, type="debit", due_date=""):
         self.name = name
         self.balance = balance
@@ -61,6 +92,7 @@ class Card:
         )
 
 class Income:
+    """Defines an Income"""
     def __init__(self, name, amount, type="one-time", date_added=None):
         self.name = name
         self.amount = amount
@@ -85,6 +117,7 @@ class Income:
         )
 
 class SavingsAccount:
+    """Defines a Savings Account"""
     def __init__(self, name, amount):
         self.name = name
         self.amount = amount
@@ -103,6 +136,7 @@ class SavingsAccount:
         )
 
 class BudgetCategory:
+    """Defines a Budget Category"""
     def __init__(self, name, monthly_limit):
         self.name = name
         self.monthly_limit = monthly_limit
@@ -122,21 +156,39 @@ class BudgetCategory:
         }
 
 class Transaction:
-    def __init__(self, amount, category, date=None, note=""):
+    """Defines a Transaction"""
+    def __init__(self, name, amount, payment_method, category, date=None, note=""):
+        self.name = name  # Added
         self.amount = amount
+        self.payment_method = payment_method  # Added
         self.category = category
         self.date = date if date else dt_date.today().isoformat()
         self.note = note
 
     def to_dict(self):
         return {
+            "name": self.name,
             "amount": self.amount,
+            "payment_method": self.payment_method,
             "category": self.category,
             "date": self.date,
             "note": self.note
         }
 
+    @staticmethod
+    def from_dict(data):
+        return Transaction(
+            name=data.get("name", ""),
+            amount=data.get("amount", 0.0),
+            payment_method=data.get("payment_method", ""),
+            category=data.get("category", ""),
+            date=data.get("date"),
+            note=data.get("note", "")
+        )
+
+
 class Expense:
+    """Defines an Recurrent Expense"""
     def __init__(self, name, amount, category, recurring=False, frequency=None, due_date=None, is_membership=False):
         self.name = name
         self.amount = amount
@@ -168,8 +220,3 @@ class Expense:
             due_date=data.get("due_date"),
             is_membership=data.get("is_membership", False),
         )
-
-
-
-
-

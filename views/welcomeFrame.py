@@ -1,4 +1,4 @@
-#This is the Initial Frame for UI
+""" This is the Initial Frame for UI """
 
 import tkinter as tk
 import customtkinter as ctk
@@ -7,7 +7,6 @@ from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
 from logic.auth import get_user, create_user, delete_user, load_all_users, save_all_users
 from logic.models import User
-
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
 

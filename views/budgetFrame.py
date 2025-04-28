@@ -1,9 +1,12 @@
+"""Handles View for Budget"""
+
 import customtkinter as ctk
 import tkinter.messagebox as messagebox
 from logic.models import BudgetCategory
 from logic.auth import save_single_user
 
 class BudgetFrame(ctk.CTkFrame):
+    #SetsUp View
     def __init__(self, master, switch_to):
         super().__init__(master)
         self.switch_to = switch_to
@@ -11,7 +14,7 @@ class BudgetFrame(ctk.CTkFrame):
 
         self.configure(fg_color="#4CAF50")
 
-        self.title = ctk.CTkLabel(self, text="🧲 Your Budgets", font=("Arial Rounded MT Bold", 24), text_color="white")
+        self.title = ctk.CTkLabel(self, text=" Your Budgets", font=("Arial Rounded MT Bold", 24), text_color="white")
         self.title.pack(pady=10)
 
         self.category_container = ctk.CTkScrollableFrame(self, fg_color="white", corner_radius=10)
@@ -27,10 +30,12 @@ class BudgetFrame(ctk.CTkFrame):
         self.back_button.pack(side="left", padx=10)
 
     def set_user(self, user):
+        """Get User"""
         self.current_user = user
         self.render_categories()
 
     def render_categories(self):
+        """Get Budget Categories"""
         for widget in self.category_container.winfo_children():
             widget.destroy()
 
@@ -65,6 +70,7 @@ class BudgetFrame(ctk.CTkFrame):
             ctk.CTkButton(action_frame, text="Delete", width=60, fg_color="red", command=lambda idx=i: self.delete_category(idx)).pack(side="left", padx=5)
 
     def open_add_popup(self):
+        """Creates a New Budget Category"""
         popup = ctk.CTkToplevel(self)
         popup.title("Add Budget Category")
         popup.geometry("360x300")
@@ -97,9 +103,10 @@ class BudgetFrame(ctk.CTkFrame):
             except Exception as e:
                 messagebox.showerror("Error", str(e))
 
-        ctk.CTkButton(popup, text="📅 Save", command=save).pack(pady=15)
+        ctk.CTkButton(popup, text="Save", command=save).pack(pady=15)
 
     def edit_category(self, index):
+        """Allows User to Edit a Posted Category"""
         name = list(self.current_user.budget_categories.keys())[index]
         cat = self.current_user.budget_categories[name]
 
@@ -129,6 +136,7 @@ class BudgetFrame(ctk.CTkFrame):
         ctk.CTkButton(popup, text="Save Changes", command=save_changes).pack(pady=15)
 
     def delete_category(self, index):
+        """Allows User to Delete a Category"""
         name = list(self.current_user.budget_categories.keys())[index]
         confirm = messagebox.askyesno("Confirm", f"Delete category '{name}'?")
         if confirm:
@@ -142,4 +150,5 @@ class BudgetFrame(ctk.CTkFrame):
             self.render_categories()
 
     def back_to_dashboard(self):
+        """Switches back to Dashboard"""
         self.switch_to("dashboard", user=self.current_user)

@@ -208,9 +208,15 @@
                 },
                 {
                     "name": "Discover",
-                    "balance": -800.0,
+                    "balance": -1500.0,
                     "type": "credit",
                     "due_date": "15"
+                },
+                {
+                    "name": "Venmo CC",
+                    "balance": -250.0,
+                    "type": "credit",
+                    "due_date": "30"
                 }
             ],
             "income": [
@@ -261,7 +267,7 @@
                     "category": "recurrent",
                     "recurring": true,
                     "frequency": "monthly",
-                    "due_date": "20",
+                    "due_date": "29",
                     "is_membership": true
                 },
                 {
@@ -270,7 +276,7 @@
                     "category": "recurrent",
                     "recurring": true,
                     "frequency": "monthly",
-                    "due_date": "20",
+                    "due_date": "19",
                     "is_membership": true
                 }
             ],
@@ -278,10 +284,58 @@
                 {
                     "name": "Fun",
                     "monthly_limit": 100.0,
+                    "spent": 300.0
+                },
+                {
+                    "name": "Eat Out",
+                    "monthly_limit": 300.0,
+                    "spent": 50.0
+                },
+                {
+                    "name": "Coffee / Boba",
+                    "monthly_limit": 60.0,
                     "spent": 0
+                },
+                {
+                    "name": "Clothes",
+                    "monthly_limit": 100.0,
+                    "spent": 350.0
                 }
             ],
-            "transactions": [],
+            "transactions": [
+                {
+                    "name": "Sushi",
+                    "amount": 35.0,
+                    "payment_method": "Discover",
+                    "category": "Eat Out",
+                    "date": "2025-04-27",
+                    "note": "Dinner w Silvi"
+                },
+                {
+                    "name": "Sunday Coffe",
+                    "amount": 15.0,
+                    "payment_method": "Discover",
+                    "category": "Eat Out",
+                    "date": "2025-04-27",
+                    "note": "Coffe Study Sesh"
+                },
+                {
+                    "name": "Zara",
+                    "amount": 350.0,
+                    "payment_method": "Discover",
+                    "category": "Clothes",
+                    "date": "2025-04-27",
+                    "note": "Concert Outfit!"
+                },
+                {
+                    "name": "Sephora",
+                    "amount": 300.0,
+                    "payment_method": "Discover",
+                    "category": "Fun",
+                    "date": "2025-04-27",
+                    "note": ""
+                }
+            ],
             "savings": {
                 "goal": 0,
                 "current": 0

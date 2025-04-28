@@ -18,6 +18,7 @@ from views.income import IncomeFrame
 from views.recurrent import RecurrentFrame
 from views.budgetFrame import BudgetFrame
 from views.graphs import GraphsFrame
+from views.ExpensesFrame import ExpensesFrame
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
@@ -51,10 +52,8 @@ class BrokeBuddyApp(ctk.CTk):
         self.frames["income"] = IncomeFrame(self, switch_to=self.show_frame)
         self.frames["savings"] = SavingsFrame(self, switch_to=self.show_frame)
         self.frames["recurrent"] = RecurrentFrame(self, switch_to=self.show_frame)
-
-        #To Do
         self.frames["budgets"] = BudgetFrame(self, switch_to=self.show_frame) #Budget Is calculated based on Whats "left" after recurrent
-        #self.frames["expenses"] = ExpensesFrame(self, switch_to=self.show_frame) #Expenses are tied to a budget category  or "other/misc/onetime.."
+        self.frames["transactions"] = ExpensesFrame(self, switch_to=self.show_frame) #Expenses are tied to a budget category  or "other/misc/onetime.."
         self.frames["graphs"] = GraphsFrame(self, switch_to=self.show_frame)
 
     #Passes User to each Frame

@@ -1,13 +1,11 @@
-'''
-Handling Reading and Storing Data.
-To be replaced with DataBase.
+"""Handling Reading and Storing Data.To be replaced with DataBase.
+                    load_data(), save_data() """
 
-       load_data(), save_data()
-'''
 import json
 from logic.models import User, Card, Income, Expense, BudgetCategory, Transaction
 
 def load_user_data(file_path):
+    """Loads User fron Json File"""
     try:
         with open(file_path, 'r') as f:
             data = json.load(f)
@@ -21,7 +19,7 @@ def load_user_data(file_path):
                 category = BudgetCategory(b["name"], b["monthly_limit"])
                 category.spent = b.get("spent", 0)
                 user.budget_categories[category.name] = category
-            user.transactions = [Transaction(**t) for t in data.get("transactions", [])]
+            user.transactions = [Transaction.from_dict(t) for t in data.get("transactions", [])]
             user.savings = data.get("savings", {"goal": 0, "current": 0})
 
             return user
@@ -29,6 +27,7 @@ def load_user_data(file_path):
         return User("default_user")
 
 def save_user_data(user, file_path):
+    """Saves User to Json File"""
     try:
         try:
             with open(file_path, 'r') as f:

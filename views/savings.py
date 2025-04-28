@@ -3,6 +3,7 @@ import customtkinter as ctk
 from tkinter import messagebox
 from logic.auth import save_single_user
 from logic.models import SavingsAccount
+from logic.resetter import MonthResetter
 import random
 
 class SavingsFrame(ctk.CTkFrame):
@@ -183,7 +184,6 @@ class SavingsFrame(ctk.CTkFrame):
     def back_to_dashboard(self):
         self.switch_to("dashboard", user=self.current_user)
 
-
     def confirm_month_end_savings(self):
         actual, budget = self.calculate_estimated_savings()
 
@@ -196,6 +196,15 @@ class SavingsFrame(ctk.CTkFrame):
             self.auto_add_projected_savings(budget)
         else:  # NO
             self.open_manual_savings_popup()
+
+        #Call Resetter. Archive the month
+        MonthResetter.archive_and_reset_user(self.current_user)
+
+        # Print Confirmation
+        messagebox.showinfo("Month Archived", "A new month has started!!")
+
+        # Refresh view
+        self.render_savings()
 
     def auto_add_projected_savings(self, amount):
         popup = ctk.CTkToplevel(self)
@@ -231,7 +240,7 @@ class SavingsFrame(ctk.CTkFrame):
                     "✨ Your wallet just did a happy dance!"
                 ]
                 messagebox.showinfo("Success", random.choice(compliments))
-                self.render_savings_accounts()
+                self.render_savings()
                 popup.destroy()
 
         ctk.CTkButton(popup, text="💾 Confirm Savings", command=save_to_account).pack(pady=20)
@@ -275,7 +284,7 @@ class SavingsFrame(ctk.CTkFrame):
                         "✨ Even a little goes a long way!"
                     ]
                     messagebox.showinfo("Success", random.choice(compliments))
-                    self.render_savings_accounts()
+                    self.render_savings()
                     popup.destroy()
                 else:
                     messagebox.showerror("Error", "Savings account not found.")

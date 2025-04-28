@@ -13,6 +13,7 @@ class User:
         self.transactions = []
         self.savings = {"goal": 0, "current": 0}
         self.savings_accounts = []
+        self.monthly_history = {}  # A dictionary to save past history month data
 
         #Keep track of balances in User for easier reuse
         @property
@@ -33,6 +34,7 @@ class User:
             "transactions": [t.to_dict() for t in self.transactions],
             "savings": self.savings,
             "savings_accounts": [s.to_dict() for s in self.savings_accounts],
+            "monthly_history": self.monthly_history,
         }
 
     @staticmethod
@@ -62,6 +64,8 @@ class User:
 
         # Load savings accounts
         user.savings_accounts = [SavingsAccount.from_dict(sa) for sa in data.get("savings_accounts", [])]
+
+        user.monthly_history = data.get("monthly_history", {})
 
         return user
 

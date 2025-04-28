@@ -1,195 +1,316 @@
 {
     "users": {
-        "user": {
-            "user_id": "user",
+        "alice": {
+            "user_id": "alice",
             "cards": [
                 {
-                    "name": "Main Bank",
-                    "balance": 1499.0,
+                    "name": "Visa",
+                    "balance": 500.0,
                     "type": "debit",
                     "due_date": ""
                 },
                 {
                     "name": "Amex",
-                    "balance": 800.0,
+                    "balance": 3000.0,
                     "type": "debit",
                     "due_date": ""
+                },
+                {
+                    "name": "Discover",
+                    "balance": -1500.0,
+                    "type": "credit",
+                    "due_date": "15"
+                },
+                {
+                    "name": "Venmo CC",
+                    "balance": -250.0,
+                    "type": "credit",
+                    "due_date": "30"
                 }
             ],
             "income": [
                 {
-                    "name": "Job",
-                    "amount": 3000,
+                    "name": "Cat Sitting",
+                    "amount": 200.0,
+                    "type": "one-time",
+                    "date_added": "2025-04-13"
+                },
+                {
+                    "name": "Scholarship",
+                    "amount": 2100.0,
                     "type": "monthly",
-                    "date_added": ""
+                    "date_added": "2025-04-13"
                 }
             ],
             "recurring_expenses": [
                 {
                     "name": "Rent",
-                    "amount": 1200.0,
-                    "category": "Housing",
+                    "amount": 650.0,
+                    "category": "recurrent",
                     "recurring": true,
                     "frequency": "monthly",
-                    "due_date": "",
+                    "due_date": "1",
+                    "is_membership": false
+                },
+                {
+                    "name": "Internet",
+                    "amount": 80.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "15",
+                    "is_membership": false
+                },
+                {
+                    "name": "Cellphone",
+                    "amount": 30.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "20",
                     "is_membership": false
                 },
                 {
                     "name": "Netflix",
                     "amount": 15.0,
-                    "category": "Membership",
+                    "category": "recurrent",
                     "recurring": true,
                     "frequency": "monthly",
-                    "due_date": "",
+                    "due_date": "29",
+                    "is_membership": true
+                },
+                {
+                    "name": "HBO",
+                    "amount": 15.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "19",
                     "is_membership": true
                 }
             ],
             "budget_categories": [
                 {
-                    "name": "Groceries",
-                    "monthly_limit": 400,
-                    "spent": 500
+                    "name": "Fun",
+                    "monthly_limit": 100.0,
+                    "spent": 0
                 },
                 {
-                    "name": "Sports",
-                    "monthly_limit": 1.0,
+                    "name": "Eat Out",
+                    "monthly_limit": 300.0,
+                    "spent": 0
+                },
+                {
+                    "name": "Coffee / Boba",
+                    "monthly_limit": 60.0,
+                    "spent": 0
+                },
+                {
+                    "name": "Clothes",
+                    "monthly_limit": 100.0,
                     "spent": 0
                 }
             ],
-            "transactions": [
+            "transactions": [],
+            "savings": {
+                "goal": 0,
+                "current": 0
+            },
+            "savings_accounts": [
                 {
-                    "amount": 15,
-                    "category": "Groceries",
-                    "date": "2025-03-31",
-                    "note": "snacks"
+                    "name": "Emergency Fund",
+                    "amount": 3965.0
                 },
                 {
-                    "amount": 25,
-                    "category": "Groceries",
-                    "date": "2025-04-01",
-                    "note": "lunch"
+                    "name": "Tuition",
+                    "amount": 4000.0
                 },
                 {
-                    "amount": 25,
-                    "category": "Coffee",
-                    "date": "2025-04-01",
-                    "note": "Coffee"
+                    "name": "Vacay",
+                    "amount": 600.0
                 }
             ],
-            "savings": {
-                "goal": 1000,
-                "current": 320
+            "monthly_history": {
+                "April 2025": {
+                    "budget_summary": {
+                        "Fun": 300.0,
+                        "Eat Out": 50.0,
+                        "Coffee / Boba": 0,
+                        "Clothes": 350.0
+                    },
+                    "savings_progress": {
+                        "goal": 0,
+                        "current": 0
+                    },
+                    "total_transactions": 4
+                }
             },
-            "savings_accounts": [],
-            "password": "pass"
+            "password": "alice"
         },
-        "alice123": {
-            "user_id": "alice123",
-            "password": "alice",
+        "user1": {
+            "user_id": "user1",
             "cards": [
                 {
                     "name": "Visa",
-                    "balance": 1800,
+                    "balance": 500.0,
                     "type": "debit",
                     "due_date": ""
+                },
+                {
+                    "name": "Amex",
+                    "balance": 3000.0,
+                    "type": "debit",
+                    "due_date": ""
+                },
+                {
+                    "name": "Discover",
+                    "balance": -1500.0,
+                    "type": "credit",
+                    "due_date": "15"
+                },
+                {
+                    "name": "Venmo CC",
+                    "balance": -250.0,
+                    "type": "credit",
+                    "due_date": "30"
                 }
             ],
             "income": [
                 {
-                    "name": "Freelance",
-                    "amount": 4200,
+                    "name": "Cat Sitting",
+                    "amount": 200.0,
+                    "type": "one-time",
+                    "date_added": "2025-04-13"
+                },
+                {
+                    "name": "Scholarship",
+                    "amount": 2100.0,
                     "type": "monthly",
-                    "date_added": ""
+                    "date_added": "2025-04-13"
                 }
             ],
             "recurring_expenses": [
                 {
-                    "name": "Spotify",
-                    "amount": 10.0,
-                    "category": "Membership",
+                    "name": "Rent",
+                    "amount": 650.0,
+                    "category": "recurrent",
                     "recurring": true,
                     "frequency": "monthly",
-                    "due_date": "",
+                    "due_date": "1",
+                    "is_membership": false
+                },
+                {
+                    "name": "Internet",
+                    "amount": 80.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "15",
+                    "is_membership": false
+                },
+                {
+                    "name": "Cellphone",
+                    "amount": 30.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "20",
+                    "is_membership": false
+                },
+                {
+                    "name": "Netflix",
+                    "amount": 15.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "29",
+                    "is_membership": true
+                },
+                {
+                    "name": "HBO",
+                    "amount": 15.0,
+                    "category": "recurrent",
+                    "recurring": true,
+                    "frequency": "monthly",
+                    "due_date": "19",
                     "is_membership": true
                 }
             ],
             "budget_categories": [
                 {
-                    "name": "Dining",
-                    "monthly_limit": 300,
-                    "spent": 150
+                    "name": "Fun",
+                    "monthly_limit": 100.0,
+                    "spent": 300.0
                 },
                 {
-                    "name": "Subscriptions",
-                    "monthly_limit": 50,
-                    "spent": 10
+                    "name": "Eat Out",
+                    "monthly_limit": 300.0,
+                    "spent": 50.0
+                },
+                {
+                    "name": "Coffee / Boba",
+                    "monthly_limit": 60.0,
+                    "spent": 0
+                },
+                {
+                    "name": "Clothes",
+                    "monthly_limit": 100.0,
+                    "spent": 350.0
                 }
             ],
             "transactions": [
                 {
-                    "amount": 30,
-                    "category": "Dining",
-                    "date": "2025-04-01",
-                    "note": "Lunch out"
+                    "name": "Sushi",
+                    "amount": 35.0,
+                    "payment_method": "Discover",
+                    "category": "Eat Out",
+                    "date": "2025-04-27",
+                    "note": "Dinner w Silvi"
+                },
+                {
+                    "name": "Sunday Coffe",
+                    "amount": 15.0,
+                    "payment_method": "Discover",
+                    "category": "Eat Out",
+                    "date": "2025-04-27",
+                    "note": "Coffe Study Sesh"
+                },
+                {
+                    "name": "Zara",
+                    "amount": 350.0,
+                    "payment_method": "Discover",
+                    "category": "Clothes",
+                    "date": "2025-04-27",
+                    "note": "Concert Outfit!"
+                },
+                {
+                    "name": "Sephora",
+                    "amount": 300.0,
+                    "payment_method": "Discover",
+                    "category": "Fun",
+                    "date": "2025-04-27",
+                    "note": ""
                 }
             ],
             "savings": {
-                "goal": 2000,
-                "current": 600
+                "goal": 0,
+                "current": 0
             },
-            "savings_accounts": [],
-            "email": "alice@gmail.com"
-        },
-        "bob456": {
-            "user_id": "bob456",
-            "password": "passbob",
-            "cards": [
+            "savings_accounts": [
                 {
-                    "name": "Checking",
-                    "balance": 600,
-                    "type": "debit",
-                    "due_date": ""
+                    "name": "Emergency Fund",
+                    "amount": 1800.0
+                },
+                {
+                    "name": "Tuition",
+                    "amount": 4000.0
+                },
+                {
+                    "name": "Vacay",
+                    "amount": 600.0
                 }
             ],
-            "income": [
-                {
-                    "name": "Part-time",
-                    "amount": 1500,
-                    "type": "monthly",
-                    "date_added": ""
-                }
-            ],
-            "recurring_expenses": [
-                {
-                    "name": "Phone Bill",
-                    "amount": 40.0,
-                    "category": "Utilities",
-                    "recurring": true,
-                    "frequency": "monthly",
-                    "due_date": "",
-                    "is_membership": false
-                }
-            ],
-            "budget_categories": [
-                {
-                    "name": "Transport",
-                    "monthly_limit": 100,
-                    "spent": 25
-                }
-            ],
-            "transactions": [
-                {
-                    "amount": 12,
-                    "category": "Transport",
-                    "date": "2025-03-30",
-                    "note": "Bus ride"
-                }
-            ],
-            "savings": {
-                "goal": 500,
-                "current": 120
-            },
-            "savings_accounts": []
+            "password": "pass"
         },
         "mago": {
             "user_id": "mago",

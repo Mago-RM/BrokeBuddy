@@ -4,6 +4,8 @@ from customtkinter import CTkImage
 from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
 from logic.auth import get_user
+from datetime import datetime
+from logic.resetter import MonthResetter
 
 
 ctk.set_appearance_mode("light")
@@ -94,7 +96,9 @@ class SignInFrame(ctk.CTkFrame):
         self.back_button.pack(pady=10)
 
     #               - - - - - - - > A C T I O N S  < - - - - - -
+
     def signin_action(self):
+        """Handles LogIn Credentials and also checks for Reset"""
         username = self.username_entry.get()
         password = self.password_entry.get()
 
@@ -105,7 +109,27 @@ class SignInFrame(ctk.CTkFrame):
         user = get_user(username, password)
 
         if user:
-            #messagebox.showinfo("Success", f"Welcome back, {username}!")
-            self.switch_to("dashboard", user=user)
+            current_month = datetime.now().month
+
+            if hasattr(user, "last_saved_month"):
+                if user.last_saved_month != current_month:
+                    # If Month is different --> needs resetting! Asks user to do so!
+                    answer = messagebox.askyesno(
+                        "New Month!",
+                        "It's a new month! Would you like to update your savings now?"
+                    )
+
+                    if answer:
+                        self.switch_to("savings", user=user)
+                        return
+                    else:
+                        # If user says NO, load dashboard
+                        self.switch_to("dashboard", user=user)
+                        return
+                else:
+                    # Month matches, normal login
+                    self.switch_to("dashboard", user=user)
+            else:
+                self.switch_to("dashboard", user=user)
         else:
             messagebox.showerror("Login Failed", "Invalid username or password.")

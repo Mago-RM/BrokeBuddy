@@ -83,6 +83,19 @@ class LoginSignUpFrame(ctk.CTkFrame):
         )
         self.signup_button.pack(pady=10)
 
+        # Forgot Pass Button
+        self.forgot_button = ctk.CTkButton(
+            self.inner_container,
+            text="Forgot Password?",
+            fg_color="#4CAF50",
+            border_color="white",
+            border_width=2,
+            text_color="white",
+            hover_color="#43a047",
+            command=self.forgot_action
+        )
+        self.forgot_button.pack(pady=10)
+
         #Back Button
         self.back_button = ctk.CTkButton(
             self.inner_container,
@@ -94,10 +107,13 @@ class LoginSignUpFrame(ctk.CTkFrame):
             hover_color="#43a047",
             command=lambda: self.switch_to("welcome")
         )
-        self.back_button.pack(pady=10)
+        self.back_button.pack(pady=20)
 
     def signin_action(self):
         self.switch_to("signin")
 
     def signup_action(self):
         self.switch_to("signup")
+
+    def forgot_action(self):
+        self.switch_to("forgot")

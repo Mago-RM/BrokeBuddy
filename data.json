@@ -2,10 +2,11 @@
     "users": {
         "alice": {
             "user_id": "alice",
+            "email": "alice@email.com",
             "cards": [
                 {
                     "name": "Visa",
-                    "balance": 500.0,
+                    "balance": 440.0,
                     "type": "debit",
                     "due_date": ""
                 },
@@ -17,7 +18,7 @@
                 },
                 {
                     "name": "Discover",
-                    "balance": -1500.0,
+                    "balance": -1540.0,
                     "type": "credit",
                     "due_date": "15"
                 },
@@ -93,12 +94,12 @@
                 {
                     "name": "Fun",
                     "monthly_limit": 100.0,
-                    "spent": 0
+                    "spent": 60.0
                 },
                 {
                     "name": "Eat Out",
                     "monthly_limit": 300.0,
-                    "spent": 0
+                    "spent": 40.0
                 },
                 {
                     "name": "Coffee / Boba",
@@ -111,7 +112,24 @@
                     "spent": 0
                 }
             ],
-            "transactions": [],
+            "transactions": [
+                {
+                    "name": "Home Depot",
+                    "amount": 60.0,
+                    "payment_method": "Visa",
+                    "category": "Fun",
+                    "date": "2025-04-27",
+                    "note": "Blinders"
+                },
+                {
+                    "name": "Sushi",
+                    "amount": 40.0,
+                    "payment_method": "Discover",
+                    "category": "Eat Out",
+                    "date": "2025-04-27",
+                    "note": "dinner"
+                }
+            ],
             "savings": {
                 "goal": 0,
                 "current": 0
@@ -130,25 +148,12 @@
                     "amount": 600.0
                 }
             ],
-            "monthly_history": {
-                "April 2025": {
-                    "budget_summary": {
-                        "Fun": 300.0,
-                        "Eat Out": 50.0,
-                        "Coffee / Boba": 0,
-                        "Clothes": 350.0
-                    },
-                    "savings_progress": {
-                        "goal": 0,
-                        "current": 0
-                    },
-                    "total_transactions": 4
-                }
-            },
+            "monthly_history": {},
             "password": "alice"
         },
         "user1": {
             "user_id": "user1",
+            "email": "user1@gmail.com",
             "cards": [
                 {
                     "name": "Visa",
@@ -314,6 +319,7 @@
         },
         "mago": {
             "user_id": "mago",
+            "email": "mago.mrm91@gmail.com",
             "cards": [
                 {
                     "name": "Visa",
@@ -475,7 +481,24 @@
                     "amount": 600.0
                 }
             ],
+            "monthly_history": {},
             "password": "chiri"
+        },
+        "Ella": {
+            "user_id": "Ella",
+            "cards": [],
+            "income": [],
+            "recurring_expenses": [],
+            "budget_categories": [],
+            "transactions": [],
+            "savings": {
+                "goal": 0,
+                "current": 0
+            },
+            "savings_accounts": [],
+            "monthly_history": {},
+            "password": "ella",
+            "email": "ella@mail.com"
         }
     }
 }

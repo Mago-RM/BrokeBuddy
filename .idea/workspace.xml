@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="Logic is working for core functionalities. Dashboard is Updated: memberships and savings are displayed. Savings is working too.">
+    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="Reset Class used in Savings. Not implemented in Dashboard yet!">
+      <change afterPath="$PROJECT_DIR$/views/ForgotFrame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/resetter.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/resetter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/savings.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/savings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/LoginSignup.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/LoginSignup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/SignIn.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/SignIn.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +95,7 @@
       <updated>1743548300912</updated>
       <workItem from="1743548302003" duration="37277000" />
       <workItem from="1744738083161" duration="115000" />
-      <workItem from="1745768774167" duration="22680000" />
+      <workItem from="1745768774167" duration="28029000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Structure Set Up.&#10;Json Reading working (temp)">
       <option name="closed" value="true" />
@@ -160,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745806734144</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Reset Class used in Savings. Not implemented in Dashboard yet!">
+      <option name="closed" value="true" />
+      <created>1745812851493</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745812851493</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,10 +195,11 @@
     <MESSAGE value="Created views folder to contain all Frames (Views).&#10;&#10;UI File Divided into specific Frames for Clarity. Program working fine.&#10;&#10;Dashboard View: placeholders and button bar added. Still in progres." />
     <MESSAGE value="Changed views to pass User object instead of user_id" />
     <MESSAGE value="Logic is working for core functionalities. Dashboard is Updated: memberships and savings are displayed. Savings is working too." />
-    <option name="LAST_COMMIT_MESSAGE" value="Logic is working for core functionalities. Dashboard is Updated: memberships and savings are displayed. Savings is working too." />
+    <MESSAGE value="Reset Class used in Savings. Not implemented in Dashboard yet!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reset Class used in Savings. Not implemented in Dashboard yet!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1745810872128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1745960359180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$main.coverage" NAME="main Coverage Results" MODIFIED="1743550806731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$charts.coverage" NAME="charts Coverage Results" MODIFIED="1744562146463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logic" />
     <SUITE FILE_PATH="coverage/BrokeBuddy$ui.coverage" NAME="ui Coverage Results" MODIFIED="1743957452758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

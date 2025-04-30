@@ -3,7 +3,7 @@
 import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from logic.charts import generate_category_spending_chart, generate_savings_chart
+from logic.charts import generate_category_spending_chart
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -46,8 +46,7 @@ class GraphsFrame(ctk.CTkFrame):
 
         charts = [
             ("📁 Category Spending", generate_category_spending_chart(self.current_user)),
-            ("📈 Monthly Spending Trend", self.generate_monthly_trend_chart()),
-            ("💰 Savings Progress", generate_savings_chart(self.current_user))
+            ("📈 Monthly Spending Trend", self.generate_monthly_trend_chart())
         ]
 
         for title, fig in charts:

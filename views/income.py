@@ -123,6 +123,9 @@ class IncomeFrame(ctk.CTkFrame):
                 messagebox.showerror("Invalid Input", "Amount must be a number.")
                 return
 
+            if amount < 0:
+                messagebox.showerror("Invalid Input", "Amount must be positive.")
+                return
             if not name:
                 messagebox.showerror("Missing Info", "Income source name is required.")
                 return
@@ -166,6 +169,35 @@ class IncomeFrame(ctk.CTkFrame):
 
         amount_entry = ctk.CTkEntry(popup)
         amount_entry.insert(0, str(income.amount))
+        amount_entry.pack(pady=5, padx=20, fill="x")
+
+        type_var = tk.StringVar(value=income.type)
+        type_label = ctk.CTkLabel(popup, text="Type:")
+        type_label.pack(pady=(10, 2))
+        type_toggle = ctk.CTkSegmentedButton(popup, values=["one-time", "weekly", "monthly"], variable=type_var)
+        type_toggle.pack(padx=20, fill="x")
+
+        def save_edited_income():
+            try:
+                amount = float(amount_entry.get())
+                if amount < 0:
+                    messagebox.showerror("Invalid Input", "Amount must be positive.")
+                    return
+                if not name_entry.get():
+                    messagebox.showerror("Missing Info", "Income source name is required.")
+                    return
+
+                income.name = name_entry.get()
+                income.amount = amount
+                income.type = type_var.get()
+                save_single_user(self.current_user)
+                self.render_income()
+                popup.destroy()
+            except ValueError:
+                messagebox.showerror("Invalid Input", "Amount must be a number.")
+
+        save_btn = ctk.CTkButton(popup, text="💾 Save Changes", command=save_edited_income)
+        save_btn.pack(pady=20)
 
     def delete_income(self, idx):
         confirm = messagebox.askyesno("Delete?", "Are you sure you want to delete this income?")

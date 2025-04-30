@@ -6,10 +6,8 @@ from customtkinter import CTkImage
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
 from datetime import datetime
-from logic.charts import generate_category_spending_chart, generate_savings_chart
-from logic.auth import save_single_user
+from logic.charts import generate_category_spending_chart
 from logic.savings import calculate_estimated_savings_for_user
-from calendar import monthrange
 from logic.budget import update_due_dates
 
 #SetUp View

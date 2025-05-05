@@ -1,0 +1,5 @@
+python-dateutil~=2.9.0.post0
+matplotlib~=3.10.1
+pandas~=2.2.3
+customtkinter~=5.2.2
+pillow~=11.2.1

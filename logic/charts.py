@@ -9,6 +9,8 @@ import pandas as pd
 def generate_category_spending_chart(user):
     """
     Generate a bar chart visualizing monthly spending by category from user data.
+    :param user: User object
+    :return: a bar chart visualizing monthly spending by category
     """
     data = defaultdict(list)
 
@@ -35,7 +37,11 @@ def generate_category_spending_chart(user):
     return fig
 
 def generate_monthly_trend_chart(user):
-    """Generates Monthly Trend Chart"""
+    """
+    Generates Monthly Trend Chart
+    :param user: User object
+    :return: monthly trend chart visualizing monthly trend
+    """
     # Check if monthly_history exists and has data
     monthly_history = user.monthly_history if user and user.monthly_history else {}
 

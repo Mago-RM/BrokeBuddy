@@ -5,7 +5,11 @@ import json
 from logic.models import User, Card, Income, Expense, BudgetCategory, Transaction
 
 def load_user_data(file_path):
-    """Loads User fron Json File"""
+    """
+    Loads User fron Json File
+    :param file_path: path to json file
+    :return: User object
+    """
     try:
         with open(file_path, 'r') as f:
             data = json.load(f)
@@ -27,7 +31,12 @@ def load_user_data(file_path):
         return User("default_user")
 
 def save_user_data(user, file_path):
-    """Saves User to Json File"""
+    """
+    Saves User to Json File
+    :param user: User object
+    :param file_path: path to json file
+    :return: None
+    """
     try:
         try:
             with open(file_path, 'r') as f:

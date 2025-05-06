@@ -8,6 +8,8 @@ def convert_due_date_input(mmdd: str) -> str:
     """
     Converts a due date string in MM/DD format to a standardized YYYY-MM-DD string format. The year is
     assumed to be the current calendar year. If the input is invalid, an empty string is returned.
+    :param mmdd: date in MM/DD format
+    :return: string formatted as YYYY-MM-DD
     """
     try:
         month, day = map(int, mmdd.split("/"))
@@ -23,6 +25,8 @@ def update_due_dates(user):
     It adjusts the due date by adding the appropriate time delta (weekly,
     bi-weekly, or monthly) until the due date is greater than or equal to
     the current date.
+    :param user: User object
+    :return: None
     """
     today = datetime.today().date()
 

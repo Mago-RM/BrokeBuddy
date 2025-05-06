@@ -14,6 +14,9 @@ def create_user(user_id, file_path="data.json"):
     prompts for a password and creates a new user entry.
 
     If the user ID already exists, the function does not create a new user.
+    :param user_id: User ID
+    :param file_path: Path to the data file
+    :return: User Object
     """
     data = load_all_users(file_path)
     if user_id in data["users"]:
@@ -38,6 +41,10 @@ def get_user(user_id, password_attempt="", file_path="data.json"):
     Retrieves and returns a user object after verifying the password attempt and loading
     the user's data. It validates the given user ID and its password. If the validation
     succeeds, it reconstructs the user's data and returns it as a User object, else None.
+    :param user_id: User ID
+    :param password_attempt: Password attempt
+    :param file_path: Path to the data file
+    :return: User Object
     """
     data = load_all_users(file_path)
     if user_id not in data["users"]:
@@ -73,6 +80,9 @@ def delete_user(user_id, file_path="data.json"):
     data file. The storage is expected to be in JSON format, containing a "users"
     key mapping user IDs to their data. If the user ID does not exist in the
     storage, prints the message and does nothing.
+    :param user_id: User ID
+    :param file_path: Path to the data file
+    :return: None
     """
     data = load_all_users(file_path)
     if user_id in data["users"]:
@@ -84,7 +94,9 @@ def delete_user(user_id, file_path="data.json"):
 
 def list_users(file_path="data.json"):
     """
-    Lists all the user names from a provided JSON file.
+    Lists all the usernames from a provided JSON file.
+    :param file_path: Path to the data file
+    :return: List of all usernames
     """
     data = load_all_users(file_path)
     return list(data["users"].keys())
@@ -93,6 +105,8 @@ def load_all_users(file_path="data.json"):
     """
     Loads all users from the specified JSON file. If the file is not found, it will
     return a dictionary with an empty "users" key.
+    :param file_path: Path to the data file
+    :return: JSON file content in the form of a dictionary
     """
     try:
         with open(file_path, "r") as f:
@@ -103,6 +117,9 @@ def load_all_users(file_path="data.json"):
 def save_all_users(data, file_path="data.json"):
     """
     Save user data to a specified JSON file.
+    :param data: JSON file content in the form of a dictionary
+    :param file_path: Path to the data file
+    :return: None
     """
     with open(file_path, "w") as f:
         json.dump(data, f, indent=4)
@@ -111,6 +128,8 @@ def save_all_users(data, file_path="data.json"):
 def save_single_user(user: User):
     """
     Saves the updated user data while preserving their password.
+    :param user: User object
+    :return: None
     """
 
     # Load full user database
@@ -129,6 +148,10 @@ def save_single_user(user: User):
     save_all_users(all_data)
 
 def login_menu():
+    """
+    Depreciated function to load a command line playground
+    :return: User object
+    """
     while True:
         print("==== BrokeBuddy Login ====")
         print("1. Log In")

@@ -25,6 +25,10 @@ class User:
             return abs(sum(card.balance for card in self.cards if card.type == "credit"))
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the user
+        :return: dictionary
+        """
         return {
             "user_id": self.user_id,
             "cards": [c.to_dict() for c in self.cards],
@@ -39,6 +43,11 @@ class User:
 
     @staticmethod
     def from_dict(data):
+        """
+        Creates a User object from a dictionary
+        :param data: dictionary containing user data
+        :return: User object
+        """
         user = User(user_id=data["user_id"])
 
         # Load cards
@@ -79,6 +88,10 @@ class Card:
         self.due_date = due_date
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the card
+        :return: dictionary
+        """
         return {
             "name": self.name,
             "balance": self.balance,
@@ -88,6 +101,11 @@ class Card:
 
     @classmethod
     def from_dict(cls, data):
+        """
+        Creates a Card object from a dictionary
+        :param data: dictionary containing card data
+        :return: Card object
+        """
         return cls(
             name=data.get("name", ""),
             balance=data.get("balance", 0),
@@ -104,6 +122,10 @@ class Income:
         self.date_added = date_added
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the income
+        :return: dictionary
+        """
         return {
             "name": self.name,
             "amount": self.amount,
@@ -113,6 +135,11 @@ class Income:
 
     @classmethod
     def from_dict(cls, data):
+        """
+        Creates an Income object from a dictionary
+        :param data: dictionary containing income data
+        :return: Income object
+        """
         return cls(
             name=data.get("name", ""),
             amount=data.get("amount", 0.0),
@@ -127,6 +154,10 @@ class SavingsAccount:
         self.amount = amount
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the savings account
+        :return: dictionary
+        """
         return {
             "name": self.name,
             "amount": self.amount
@@ -134,6 +165,11 @@ class SavingsAccount:
 
     @classmethod
     def from_dict(cls, data):
+        """
+        Creates an SavingsAccount object from a dictionary
+        :param data: dictionary containing savings account data
+        :return: SavingsAccount object
+        """
         return cls(
             name=data.get("name", ""),
             amount=data.get("amount", 0.0)
@@ -147,12 +183,25 @@ class BudgetCategory:
         self.spent = 0
 
     def add_expense(self, amount):
+        """
+        Updates amount spent in a budget category based on amount
+        :param amount: numeric amount
+        :return: None
+        """
         self.spent += amount
 
     def remaining(self):
+        """
+        Returns remaining amount in a budget category
+        :return: numeric amount
+        """
         return self.monthly_limit - self.spent
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the budget category
+        :return: dictionary
+        """
         return {
             "name": self.name,
             "monthly_limit": self.monthly_limit,
@@ -170,6 +219,10 @@ class Transaction:
         self.note = note
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the transaction
+        :return: dictionary
+        """
         return {
             "name": self.name,
             "amount": self.amount,
@@ -181,6 +234,11 @@ class Transaction:
 
     @staticmethod
     def from_dict(data):
+        """
+        Creates a Transaction object from a dictionary
+        :param data: dictionary containing transaction data
+        :return: Transaction object
+        """
         return Transaction(
             name=data.get("name", ""),
             amount=data.get("amount", 0.0),
@@ -203,6 +261,10 @@ class Expense:
         self.is_membership = is_membership
 
     def to_dict(self):
+        """
+        Returns a dictionary representation of the expense
+        :return: dictionary
+        """
         return {
             "name": self.name,
             "amount": self.amount,
@@ -215,6 +277,11 @@ class Expense:
 
     @staticmethod
     def from_dict(data):
+        """
+        Creates an Expense object from a dictionary
+        :param data: dictionary containing expense data
+        :return: Expense object
+        """
         return Expense(
             name=data["name"],
             amount=data["amount"],

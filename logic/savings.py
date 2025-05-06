@@ -1,4 +1,9 @@
 def calculate_estimated_savings_for_user(user):
+    """
+    Calculates the estimated savings for a user based on their income, budget and expenses.
+    :param user: User object
+    :return: (actual savings, estimated savings) as numbers
+    """
     income = sum(i.amount if i.type == "monthly" else i.amount * 4 for i in user.income)
     credit_due = sum(abs(c.balance) * 0.1 for c in user.cards if c.type == "credit")
 

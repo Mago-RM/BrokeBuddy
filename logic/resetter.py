@@ -8,7 +8,11 @@ class MonthResetter:
 
     @staticmethod
     def archive_and_reset_user(user):
-        """Archive the current month and prepare user for new month."""
+        """
+        Archive the current month and prepare user for new month.
+        :param user: User object
+        :return: None
+        """
 
         # 1. Archive current month
         month_name = datetime.now().strftime("%B %Y")  # "April 2025"

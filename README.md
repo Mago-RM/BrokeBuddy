@@ -1,38 +1,65 @@
-#BrokeBuddy
+# 💸 BrokeBuddy  
 
 **Group Members:**  
 - Margarita Rincon Matamoros  
-- Tien Pham
+- Tien Pham  
 
 ---
 
-##Project Description
+## 📖 Project Description  
+**BrokeBuddy** is a **Python-based desktop budgeting application** designed to help College Students track and manage their personal finances.  
 
-**BrokeBuddy** is a Python-based desktop budgeting application designed to help users track and manage their personal finances. The app provides a simple interface for adding income, recording expenses, managing credit/debit cards, and monitoring savings. It supports recurring charges, generates visual graphs to highlight spending trends, and offers an all-in-one dashboard for easy navigation. All data is stored securely in a local JSON file, allowing the app to run fully offline.
+🔹 Features include:  
+- Add income, record expenses, and manage debit/credit cards  
+- Track savings and recurring charges  
+- Generate spending graphs & insights with Matplotlib  
+- Dashboard view for an all-in-one summary  
+- Offline-first design with secure local JSON storage  
 
 ---
 
-##Dependencies
+## 🛠️ Tech Stack  
 
-The application requires the following external Python libraries:
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)  
+![CustomTkinter](https://img.shields.io/badge/CustomTkinter-FF6F00?logo=python&logoColor=white)  
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?logo=plotly&logoColor=white)  
+![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white)  
+![Dateutil](https://img.shields.io/badge/Python--dateutil-FFD43B?logo=python&logoColor=black)  
+![Pillow](https://img.shields.io/badge/Pillow-3693F3?logo=python&logoColor=white)  
 
-- `customtkinter`
-- `matplotlib`
-- `pandas`
-- `python-dateutil`
-- `pillow`
+---
 
-----
-##To Run  
+## 📦 Dependencies  
+
 Install dependencies with:  
 pip install -r requirements.txt
 
 Application runs from 
-							python UI.py
+			python UI.py
 
---
 
-#File Structure & Overview
+## 📸 Screenshots  
+
+**Initial View**
+![Start](screenshots/BB_start.png) 
+
+**Login Screen**  
+![Login](screenshots/BB_Login.png) 
+
+**Dashboard View**  
+![Dashboard](screenshots/BB_Dashboard.png)  
+
+**Savings**  
+![Savings](screenshots/BB_Income.png)  
+
+**User View**  
+![User](screenshots/BB_User.png)  
+
+
+
+
+
+## File Structure & Overview
 
 BrokeBuddy/  
 │  
@@ -70,6 +97,5 @@ BrokeBuddy/
 
 --
 
-#Bugs and Limitations  
-The Console Menu Playground in menu.py does not fully work anymore due to new changes to the data model
-
+#Limitations  
+The Console Menu Playground in menu.py does not fully work anymore due to new changes to the data model.

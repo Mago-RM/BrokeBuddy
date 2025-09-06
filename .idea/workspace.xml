@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="requirements.txt">
-      <change afterPath="$PROJECT_DIR$/Screenshots/BB_Cards.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/BB_Dashboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/BB_Income.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/BB_Login.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/BB_User.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/BB_start.png" afterDir="false" />
+    <list default="true" id="a0040b8b-e43d-4cdd-bb54-6fd559136400" name="Changes" comment="ReadME Updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -53,27 +47,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.UI.executor": "Run",
-    "Python.charts.executor": "Run",
-    "Python.dashboard.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.menu.executor": "Run",
-    "Python.savings.executor": "Run",
-    "Python.ui.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/magorm/PycharmProjects/BrokeBuddy/Screenshots",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.UI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.charts.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dashboard.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.savings.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ui.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/magorm/PycharmProjects/BrokeBuddy/Screenshots&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Screenshots" />
@@ -103,7 +97,8 @@
       <workItem from="1743548302003" duration="37277000" />
       <workItem from="1744738083161" duration="115000" />
       <workItem from="1745768774167" duration="28029000" />
-      <workItem from="1757185066987" duration="1465000" />
+      <workItem from="1757185066987" duration="1528000" />
+      <workItem from="1757186816128" duration="114000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Structure Set Up.&#10;Json Reading working (temp)">
       <option name="closed" value="true" />
@@ -177,7 +172,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745812851493</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ReadME Updated">
+      <option name="closed" value="true" />
+      <created>1757186690956</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1757186690956</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ReadME Updated">
+      <option name="closed" value="true" />
+      <created>1757186720613</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1757186720613</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +215,8 @@
     <MESSAGE value="Changed views to pass User object instead of user_id" />
     <MESSAGE value="Logic is working for core functionalities. Dashboard is Updated: memberships and savings are displayed. Savings is working too." />
     <MESSAGE value="Reset Class used in Savings. Not implemented in Dashboard yet!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reset Class used in Savings. Not implemented in Dashboard yet!" />
+    <MESSAGE value="ReadME Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="ReadME Updated" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BrokeBuddy$UI.coverage" NAME="UI Coverage Results" MODIFIED="1757186149052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

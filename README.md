@@ -41,19 +41,19 @@ Application runs from
 ## 📸 Screenshots  
 
 **Initial View**
-![Start](screenshots/BB_start.png) 
+![Start](Screenshots/BB_start.png) 
 
 **Login Screen**  
-![Login](screenshots/BB_Login.png) 
+![Login](Screenshots/BB_Login.png) 
 
 **Dashboard View**  
-![Dashboard](screenshots/BB_Dashboard.png)  
+![Dashboard](Screenshots/BB_Dashboard.png)  
 
 **Savings**  
-![Savings](screenshots/BB_Income.png)  
+![Savings](Screenshots/BB_Income.png)  
 
 **User View**  
-![User](screenshots/BB_User.png)  
+![User](Screenshots/BB_User.png)  
 
 
 
